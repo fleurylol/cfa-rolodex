@@ -3,11 +3,11 @@ import { z } from "zod";
 import prisma from "@/prisma/client";
 
 const contactSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  phone: z.string(),
-  address: z.string(),
-  business: z.string(),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Vaild email is required"),
+  phone: z.string().min(1, "A phone number is required"),
+  address: z.string().min(1, "An address is required"),
+  business: z.string().min(1, "A business name is required"),
   notes: z.string(),
 });
 
