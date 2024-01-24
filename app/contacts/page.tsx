@@ -1,10 +1,12 @@
 import { Button } from "@radix-ui/themes";
-import React from "react";
+import Link from "next/link";
 
 const ContactsPage = () => {
   return (
     <div>
-      <Button>New Contact</Button>
+      <Button>
+        <Link href="/contacts/new">New Contact</Link>
+      </Button>
     </div>
   );
 };
