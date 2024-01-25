@@ -2,6 +2,7 @@ import prisma from "@/prisma/client";
 import { Box, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import ContactDetails from "./ContactDetails";
+import EditContactButton from "./edit/EditContactButton";
 
 interface Props {
   params: { id: string };
@@ -19,7 +20,9 @@ const ContactDetailPage = async ({ params }: Props) => {
       <Box>
         <ContactDetails contact={contact} />
       </Box>
-      <Box></Box>
+      <Box>
+        <EditContactButton contactId={contact.id} />
+      </Box>
     </Grid>
   );
 };

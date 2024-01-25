@@ -1,19 +1,17 @@
-import prisma from "@/prisma/client";
 import {
+  TableRoot,
+  TableHeader,
+  TableRow,
+  TableColumnHeaderCell,
   TableBody,
   TableCell,
-  TableColumnHeaderCell,
-  TableHeader,
-  TableRoot,
-  TableRow,
 } from "@radix-ui/themes";
-import { Link } from "../components";
+import React from "react";
 import ContactActionBar from "./ContactActionBar";
-import delay from "delay";
+import { Skeleton } from "@/app/components";
 
-const ContactsPage = async () => {
-  const contacts = await prisma.contact.findMany();
-  await delay(2000);
+const ContactLoadingSkeleton = () => {
+  const contacts = [1, 2, 3, 4, 5];
   return (
     <div>
       <ContactActionBar />
@@ -29,13 +27,15 @@ const ContactsPage = async () => {
         </TableHeader>
         <TableBody>
           {contacts.map((contact) => (
-            <TableRow key={contact.id}>
+            <TableRow key={contact}>
               <TableCell>
-                <Link href={`/contacts/${contact.id}`}>{contact.name}</Link>
+                <Skeleton />
               </TableCell>
-              <TableCell>{contact.business}</TableCell>
+              <TableCell>
+                <Skeleton />
+              </TableCell>
               <TableCell className="hidden md:table-cell">
-                {contact.phone}
+                <Skeleton />
               </TableCell>
             </TableRow>
           ))}
@@ -44,4 +44,4 @@ const ContactsPage = async () => {
     </div>
   );
 };
-export default ContactsPage;
+export default ContactLoadingSkeleton;
