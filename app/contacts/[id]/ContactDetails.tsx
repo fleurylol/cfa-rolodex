@@ -7,7 +7,7 @@ import { Contact } from "@prisma/client";
 const ContactDetails = ({ contact }: { contact: Contact }) => {
   return (
     <>
-      <Grid>
+      <Grid className="max-w-xl">
         <Heading>{contact.name}</Heading>
         <Text size="4">{contact.business}</Text>
         <Text>{contact.address}</Text>
