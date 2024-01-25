@@ -3,7 +3,6 @@ import { Box, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import ContactDetails from "./ContactDetails";
 import EditContactButton from "./edit/EditContactButton";
-import delay from "delay";
 
 interface Props {
   params: { id: string };
@@ -15,7 +14,7 @@ const ContactDetailPage = async ({ params }: Props) => {
   });
 
   if (!contact) notFound();
-  await delay(2000);
+
   return (
     <Grid columns={{ initial: "1", md: "2" }} gap="5">
       <Box>

@@ -1,7 +1,17 @@
-import React from "react";
+import prisma from "@/prisma/client";
+import ContactForm from "../../_components/ContactForm";
+import { notFound } from "next/navigation";
 
-const EditContactIssue = () => {
-  return <div>EditContactIssue</div>;
+interface Props {
+  params: { id: string };
+}
+
+const EditContactIssue = async ({ params }: Props) => {
+  const contact = await prisma.contact.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+  if (!contact) notFound();
+  return <ContactForm contact={contact} />;
 };
 
 export default EditContactIssue;

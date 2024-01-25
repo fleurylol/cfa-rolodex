@@ -1,34 +1,23 @@
 import { Skeleton } from "@/app/components";
-import { Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
-import { MdLocalPhone, MdOutlineAlternateEmail } from "react-icons/md";
+import { Box, Card, Flex, Grid } from "@radix-ui/themes";
 
-const loading = () => {
+const ContactDetailsLoading = () => {
   return (
-    <>
+    <Box>
       <Grid className="max-w-xl">
-        <Heading></Heading>
-        <Text size="4">
-          <Skeleton />
-        </Text>
-        <Text>
-          <Skeleton />
-        </Text>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
         <Flex gap={"3"}>
-          <MdLocalPhone size={"24"} />{" "}
-          <Text>
-            <Skeleton />
-          </Text>
-          <MdOutlineAlternateEmail size={"24"} />{" "}
-          <Text>
-            <Skeleton />
-          </Text>
+          <Skeleton width={"20rem"} />
+          <Skeleton width={"20rem"} />
         </Flex>
       </Grid>
       <Card className="prose" mt="4">
         <Skeleton count={3} />
       </Card>
-    </>
+    </Box>
   );
 };
 
-export default loading;
+export default ContactDetailsLoading;
