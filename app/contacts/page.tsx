@@ -13,7 +13,7 @@ import delay from "delay";
 
 const ContactsPage = async () => {
   const contacts = await prisma.contact.findMany();
-  await delay(2000);
+  //await delay(2000);
   return (
     <div>
       <ContactActionBar />
@@ -22,6 +22,9 @@ const ContactsPage = async () => {
           <TableRow>
             <TableColumnHeaderCell>Name</TableColumnHeaderCell>
             <TableColumnHeaderCell>Business</TableColumnHeaderCell>
+            <TableColumnHeaderCell className="hidden md:table-cell">
+              Address
+            </TableColumnHeaderCell>
             <TableColumnHeaderCell className="hidden md:table-cell">
               Phone
             </TableColumnHeaderCell>
@@ -34,6 +37,9 @@ const ContactsPage = async () => {
                 <Link href={`/contacts/${contact.id}`}>{contact.name}</Link>
               </TableCell>
               <TableCell>{contact.business}</TableCell>
+              <TableCell className="hidden md:table-cell">
+                {contact.address}
+              </TableCell>
               <TableCell className="hidden md:table-cell">
                 {contact.phone}
               </TableCell>

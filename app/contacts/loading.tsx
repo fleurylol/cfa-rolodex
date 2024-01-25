@@ -21,6 +21,9 @@ const ContactLoadingSkeleton = () => {
             <TableColumnHeaderCell>Name</TableColumnHeaderCell>
             <TableColumnHeaderCell>Business</TableColumnHeaderCell>
             <TableColumnHeaderCell className="hidden md:table-cell">
+              Address
+            </TableColumnHeaderCell>
+            <TableColumnHeaderCell className="hidden md:table-cell">
               Phone
             </TableColumnHeaderCell>
           </TableRow>
@@ -32,6 +35,9 @@ const ContactLoadingSkeleton = () => {
                 <Skeleton />
               </TableCell>
               <TableCell>
+                <Skeleton />
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
                 <Skeleton />
               </TableCell>
               <TableCell className="hidden md:table-cell">
