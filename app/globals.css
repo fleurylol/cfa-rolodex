@@ -20,4 +20,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .nav-link {
+    @apply no-underline hover:text-red-300 text-white transition-colors;
+  }
 }
