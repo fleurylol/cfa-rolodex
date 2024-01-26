@@ -14,16 +14,20 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Spinner } from "@/app/components";
 
 const DeleteContactButton = ({ contactId }: { contactId: number }) => {
   const router = useRouter();
   const [error, setError] = useState(false);
+  const [isDeleting, setDeleting] = useState(false);
   const deleteContact = async () => {
     try {
+      setDeleting(true);
       await axios.delete("/api/contacts/" + contactId);
       router.push("/contacts");
       router.refresh();
     } catch (error) {
+      setDeleting(false);
       setError(true);
     }
   };
@@ -31,8 +35,8 @@ const DeleteContactButton = ({ contactId }: { contactId: number }) => {
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button>
-            <TrashIcon /> Delete Contact
+          <Button disabled={isDeleting}>
+            <TrashIcon /> Delete Contact {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
