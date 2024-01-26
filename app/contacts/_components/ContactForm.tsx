@@ -41,7 +41,8 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      await axios.post("/api/contacts", data);
+      if (contact) await axios.patch("/api/contacts/" + contact.id, data);
+      else await axios.post("/api/contacts", data);
       router.push("/contacts");
       router.refresh();
     } catch (error) {

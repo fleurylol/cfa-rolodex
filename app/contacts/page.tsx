@@ -9,11 +9,9 @@ import {
 } from "@radix-ui/themes";
 import { Link } from "../components";
 import ContactActionBar from "./ContactActionBar";
-import delay from "delay";
 
 const ContactsPage = async () => {
   const contacts = await prisma.contact.findMany();
-  //await delay(2000);
   return (
     <div>
       <ContactActionBar />

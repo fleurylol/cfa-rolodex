@@ -6,7 +6,7 @@ interface Props {
   params: { id: string };
 }
 
-const EditContactIssue = async ({ params }: Props) => {
+const EditContact = async ({ params }: Props) => {
   const contact = await prisma.contact.findUnique({
     where: { id: parseInt(params.id) },
   });
@@ -14,4 +14,4 @@ const EditContactIssue = async ({ params }: Props) => {
   return <ContactForm contact={contact} />;
 };
 
-export default EditContactIssue;
+export default EditContact;
