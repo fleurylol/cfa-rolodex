@@ -11,8 +11,11 @@ import {
   Flex,
 } from "@radix-ui/themes";
 import { TrashIcon } from "@radix-ui/react-icons";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const DeleteContactButton = ({ contactId }: { contactId: number }) => {
+  const router = useRouter();
   return (
     <AlertDialogRoot>
       <AlertDialogTrigger>
@@ -32,7 +35,15 @@ const DeleteContactButton = ({ contactId }: { contactId: number }) => {
             </Button>
           </AlertDialogCancel>
           <AlertDialogAction>
-            <Button>Delete Contact</Button>
+            <Button
+              onClick={async () => {
+                await axios.delete("/api/contacts/" + contactId);
+                router.push("/contacts");
+                router.refresh();
+              }}
+            >
+              Delete Contact
+            </Button>
           </AlertDialogAction>
         </Flex>
       </AlertDialogContent>
