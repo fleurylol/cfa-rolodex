@@ -28,3 +28,20 @@ export async function PATCH(
   });
   return NextResponse.json(updatedContact);
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const contact = await prisma.contact.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+
+  if (!contact)
+    return NextResponse.json({ error: "Invaild contact" }, { status: 404 });
+
+  await prisma.contact.delete({
+    where: { id: contact.id },
+  });
+  return NextResponse.json({});
+}
