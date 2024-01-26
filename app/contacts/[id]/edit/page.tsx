@@ -1,6 +1,11 @@
 import prisma from "@/prisma/client";
-import ContactForm from "../../_components/ContactForm";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const ContactForm = dynamic(
+  () => import("@/app/contacts/_components/ContactForm"),
+  { ssr: false }
+);
 
 interface Props {
   params: { id: string };
