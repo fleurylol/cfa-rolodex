@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const EditContactButton = ({ contactId }: { contactId: number }) => {
   return (
-    <Button>
+    <Button color="green">
       <Pencil2Icon />
       <Link href={`/contacts/${contactId}/edit`}>Edit Contact</Link>
     </Button>

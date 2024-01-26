@@ -16,7 +16,7 @@ const ContactDetails = ({ contact }: { contact: Contact }) => {
           <MdOutlineAlternateEmail size={"24"} /> <Text>{contact.email}</Text>
         </Flex>
       </Grid>
-      <Card className="prose" mt="4">
+      <Card className="prose max-w-full" mt="4">
         <ReactMarkdown>{contact.notes}</ReactMarkdown>
       </Card>
     </>
