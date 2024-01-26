@@ -7,7 +7,7 @@ import {
   TableRoot,
   TableRow,
 } from "@radix-ui/themes";
-import { Link } from "../components";
+import { Link } from "../../components";
 import ContactActionBar from "./ContactActionBar";
 
 const ContactsPage = async () => {

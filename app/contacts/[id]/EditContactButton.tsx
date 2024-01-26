@@ -6,7 +6,7 @@ const EditContactButton = ({ contactId }: { contactId: number }) => {
   return (
     <Button color="green">
       <Pencil2Icon />
-      <Link href={`/contacts/${contactId}/edit`}>Edit Contact</Link>
+      <Link href={`/contacts/edit/${contactId}`}>Edit Contact</Link>
     </Button>
   );
 };

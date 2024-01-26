@@ -24,7 +24,7 @@ const DeleteContactButton = ({ contactId }: { contactId: number }) => {
     try {
       setDeleting(true);
       await axios.delete("/api/contacts/" + contactId);
-      router.push("/contacts");
+      router.push("/contacts/list");
       router.refresh();
     } catch (error) {
       setDeleting(false);
