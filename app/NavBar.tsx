@@ -5,6 +5,7 @@ import React from "react";
 import { BsPersonRolodex } from "react-icons/bs";
 import classnames from "classnames";
 import { useSession } from "next-auth/react";
+import { Skeleton } from "@/app/components";
 import {
   Avatar,
   Box,
@@ -60,7 +61,7 @@ const NavLinks = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
 
-  if (status === "loading") return null;
+  if (status === "loading") return <Skeleton width={"3rem"} />;
 
   if (status === "unauthenticated")
     return (
