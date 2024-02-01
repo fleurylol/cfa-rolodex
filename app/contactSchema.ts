@@ -7,4 +7,5 @@ export const contactSchema = z.object({
   address: z.string().min(1, "An address is required"),
   business: z.string().min(1, "A business name is required"),
   notes: z.string(),
+  //image: z.string().nullable(),
 });

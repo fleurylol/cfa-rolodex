@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 import { Container, Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import AuthProvider from "./auth/Provider";
+import { EdgeStoreProvider } from "./libs/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,9 @@ export default function RootLayout({
           <Theme accentColor="red">
             <NavBar />
             <main className="p-5">
-              <Container>{children}</Container>
+              <Container>
+                <EdgeStoreProvider>{children}</EdgeStoreProvider>
+              </Container>
             </main>
           </Theme>
         </AuthProvider>

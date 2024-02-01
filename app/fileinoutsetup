@@ -18,12 +18,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import SimpleMDE from "react-simplemde-editor";
-import { string, z } from "zod";
+import { z } from "zod";
 import { useEdgeStore } from "@/app/libs/edgestore";
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactForm = ({ contact }: { contact?: Contact }) => {
-  const { edgestore } = useEdgeStore();
+  // const { edgestore } = useEdgeStore();
   const router = useRouter();
   const {
     register,
@@ -35,20 +35,11 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
   });
   const [error, setError] = useState("");
   const [isSumbitting, setSubmitting] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [file, setFile] = useState<File | null>(null);
+  // const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  // const [file, setFile] = useState<File | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
-    let imageUrl = null;
-    if (file) {
-      const uploadedImage = await edgestore.publicFiles.upload({ file });
-      if (uploadedImage && uploadedImage.url) {
-        imageUrl = uploadedImage.url!;
-      }
-    }
     try {
-      console.log(imageUrl);
-      //data.image = imageUrl;
       setSubmitting(true);
       if (contact) await axios.patch("/api/contacts/" + contact.id, data);
       else await axios.post("/api/contacts", data);
@@ -59,19 +50,19 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
       setError("An unexpected error occured.");
     }
   });
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null;
-    setFile(file);
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
-    }
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
-    } else {
-      setPreviewUrl(null);
-    }
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0] ?? null;
+  //   setFile(file);
+  //   if (previewUrl) {
+  //     URL.revokeObjectURL(previewUrl);
+  //   }
+  //   if (file) {
+  //     const url = URL.createObjectURL(file);
+  //     setPreviewUrl(url);
+  //   } else {
+  //     setPreviewUrl(null);
+  //   }
+  // };
   return (
     <div className="max-w-xl">
       {error && (
@@ -137,11 +128,11 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
             </TextFieldRoot>
             <ErrorMessage>{errors.address?.message}</ErrorMessage>
           </Box>
-          <input
+          {/* <input
             type="file"
             accept="image/jpeg,image/png"
             onChange={handleFileChange}
-          />
+          /> */}
         </Grid>
         <Controller
           name="notes"
@@ -149,11 +140,11 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
           defaultValue={contact?.notes}
           render={({ field }) => <SimpleMDE placeholder="Notes" {...field} />}
         />
-        {previewUrl && file && (
+        {/* {previewUrl && file && (
           <div className="mt-4">
             <img src={previewUrl} alt="Selected file" />
           </div>
-        )}
+        )} */}
         <Button disabled={isSumbitting}>
           {contact ? "Update contact" : "Create New Contact"}{" "}
           {isSumbitting && <Spinner />}

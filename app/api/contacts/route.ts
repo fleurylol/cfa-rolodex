@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
       address: body.address,
       business: body.business,
       notes: body.notes,
+      image: body.imgurl,
     },
   });
   return NextResponse.json(newContact, { status: 201 });

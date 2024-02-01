@@ -18,7 +18,9 @@ model Contact {
   address  String
   business String
   notes    String @db.Text
+  image    String?
 }
+
 
 model Account {
   id                String  @id @default(cuid())
