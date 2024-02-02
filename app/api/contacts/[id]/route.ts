@@ -28,6 +28,7 @@ export async function PATCH(
       phone: body.phone,
       email: body.email,
       notes: body.notes,
+      image: body.image,
     },
   });
   return NextResponse.json(updatedContact);

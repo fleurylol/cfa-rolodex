@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import SimpleMDE from "react-simplemde-editor";
-import { string, z } from "zod";
+import { z } from "zod";
 import { useEdgeStore } from "@/app/libs/edgestore";
 type ContactFormData = z.infer<typeof contactSchema>;
 
@@ -29,6 +29,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -38,17 +39,13 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
-  const onSubmit = handleSubmit(async (data) => {
-    let imageUrl = null;
+  const onSubmit = handleSubmit(async (data, e) => {
+    e?.preventDefault();
     if (file) {
       const uploadedImage = await edgestore.publicFiles.upload({ file });
-      if (uploadedImage && uploadedImage.url) {
-        imageUrl = uploadedImage.url!;
-      }
+      data.image = uploadedImage.url;
     }
     try {
-      console.log(imageUrl);
-      //data.image = imageUrl;
       setSubmitting(true);
       if (contact) await axios.patch("/api/contacts/" + contact.id, data);
       else await axios.post("/api/contacts", data);

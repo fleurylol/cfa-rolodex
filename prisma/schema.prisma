@@ -18,8 +18,9 @@ model Contact {
   address  String
   business String
   notes    String @db.Text
-  image    String?
+  image String?
 }
+
 
 
 model Account {

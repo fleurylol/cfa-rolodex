@@ -1,8 +1,9 @@
-import { Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
+import { Box, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import React from "react";
 import { MdLocalPhone, MdOutlineAlternateEmail } from "react-icons/md";
 import ReactMarkdown from "react-markdown";
 import { Contact } from "@prisma/client";
+import Image from "next/image";
 
 const ContactDetails = ({ contact }: { contact: Contact }) => {
   return (
@@ -19,6 +20,16 @@ const ContactDetails = ({ contact }: { contact: Contact }) => {
       <Card className="prose max-w-full" mt="4">
         <ReactMarkdown>{contact.notes}</ReactMarkdown>
       </Card>
+      <Box>
+        {contact.image && (
+          <Image
+            src={contact.image}
+            alt={contact.name}
+            width={200}
+            height={200}
+          />
+        )}
+      </Box>
     </>
   );
 };
