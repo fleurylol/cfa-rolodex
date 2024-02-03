@@ -17,7 +17,6 @@ model Contact {
   phone    String
   address  String
   business String
-  notes    String @db.Text
   image String?
 }
 

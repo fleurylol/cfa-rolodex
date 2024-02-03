@@ -24,12 +24,14 @@ const ContactDetailPage = async ({ params }: Props) => {
       <Box className="md:col-span-4 ">
         <ContactDetails contact={contact} />
       </Box>
-      {session && <Box>
-        <Flex direction="column" gap="4">
-          <EditContactButton contactId={contact.id} />
-          <DeleteContactButton contactId={contact.id} />
-        </Flex>
-      </Box>}
+      {session && (
+        <Box>
+          <Flex direction="column" gap="4">
+            <EditContactButton contactId={contact.id} />
+            <DeleteContactButton contact={contact} />
+          </Flex>
+        </Box>
+      )}
     </Grid>
   );
 };

@@ -16,8 +16,7 @@ import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import SimpleMDE from "react-simplemde-editor";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEdgeStore } from "@/app/libs/edgestore";
 import DeleteImageButton from "./DeleteImageButton";
@@ -28,7 +27,6 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
   const router = useRouter();
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm<ContactFormData>({
@@ -58,10 +56,15 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
       data.image = uploadedImage.url;
     }
     try {
-      if (contact) await axios.patch("/api/contacts/" + contact.id, data);
-      else await axios.post("/api/contacts", data);
-      router.push("/contacts/list");
-      router.refresh();
+      if (contact) {
+        await axios.patch("/api/contacts/" + contact.id, data);
+        router.push("/contacts/" + contact.id);
+        router.refresh();
+      } else {
+        await axios.post("/api/contacts", data);
+        router.push("/contacts/list");
+        router.refresh();
+      }
     } catch (error) {
       setSubmitting(false);
       setError("An unexpected error occured.");
@@ -152,12 +155,6 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
             onChange={handleFileChange}
           />
         </Grid>
-        <Controller
-          name="notes"
-          control={control}
-          defaultValue={contact?.notes}
-          render={({ field }) => <SimpleMDE placeholder="Notes" {...field} />}
-        />
         {previewUrl && file && (
           <>
             <p>Preview</p>

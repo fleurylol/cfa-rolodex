@@ -15,15 +15,21 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Spinner } from "@/app/components";
+import { useEdgeStore } from "@/app/libs/edgestore";
+import { Contact } from "@prisma/client";
 
-const DeleteContactButton = ({ contactId }: { contactId: number }) => {
+const DeleteContactButton = ({ contact }: { contact: Contact }) => {
+  const { edgestore } = useEdgeStore();
   const router = useRouter();
   const [error, setError] = useState(false);
   const [isDeleting, setDeleting] = useState(false);
   const deleteContact = async () => {
     try {
       setDeleting(true);
-      await axios.delete("/api/contacts/" + contactId);
+      await edgestore.publicFiles.delete({
+        url: contact.image as string,
+      });
+      await axios.delete("/api/contacts/" + contact.id);
       router.push("/contacts/list");
       router.refresh();
     } catch (error) {

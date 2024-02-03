@@ -18,7 +18,6 @@ export async function POST(request: NextRequest) {
       phone: body.phone,
       address: body.address,
       business: body.business,
-      notes: body.notes,
       image: body.image,
     },
   });

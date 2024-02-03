@@ -8,13 +8,13 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  // const session = await getServerSession(authOptions);
-  // if (!session) return NextResponse.json({}, { status: 401 });
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
   const body = await request.json();
   const validation = patchContactSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
-  const { name, business, address, phone, email, notes, image } = body;
+  const { name, business, address, phone, email, image } = body;
   const contact = await prisma.contact.findUnique({
     where: { id: parseInt(params.id) },
   });
@@ -30,7 +30,6 @@ export async function PATCH(
       address,
       phone,
       email,
-      notes,
       image,
     },
   });
