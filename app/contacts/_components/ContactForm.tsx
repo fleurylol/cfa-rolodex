@@ -20,6 +20,7 @@ import { Controller, useForm } from "react-hook-form";
 import SimpleMDE from "react-simplemde-editor";
 import { z } from "zod";
 import { useEdgeStore } from "@/app/libs/edgestore";
+import DeleteImageButton from "./DeleteImageButton";
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactForm = ({ contact }: { contact?: Contact }) => {
@@ -29,7 +30,6 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
     register,
     control,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -41,12 +41,23 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
 
   const onSubmit = handleSubmit(async (data, e) => {
     e?.preventDefault();
-    if (file) {
-      const uploadedImage = await edgestore.publicFiles.upload({ file });
+    setSubmitting(true);
+    if (file && contact?.image) {
+      const uploadedImage = await edgestore.publicFiles.upload({
+        file,
+        options: {
+          replaceTargetUrl: contact!.image as string,
+        },
+      });
+      data.image = uploadedImage.url;
+    }
+    if (file && !contact?.image) {
+      const uploadedImage = await edgestore.publicFiles.upload({
+        file,
+      });
       data.image = uploadedImage.url;
     }
     try {
-      setSubmitting(true);
       if (contact) await axios.patch("/api/contacts/" + contact.id, data);
       else await axios.post("/api/contacts", data);
       router.push("/contacts/list");
@@ -69,6 +80,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
       setPreviewUrl(null);
     }
   };
+
   return (
     <div className="max-w-xl">
       {error && (
@@ -147,15 +159,38 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
           render={({ field }) => <SimpleMDE placeholder="Notes" {...field} />}
         />
         {previewUrl && file && (
-          <div className="mt-4">
-            <img src={previewUrl} alt="Selected file" />
-          </div>
+          <>
+            <p>Preview</p>
+            <div className="mt-4">
+              <img
+                src={previewUrl}
+                alt="Selected file"
+                width={200}
+                height={200}
+              />
+            </div>
+          </>
         )}
-        <Button disabled={isSumbitting}>
+        <Button type="submit" disabled={isSumbitting}>
           {contact ? "Update contact" : "Create New Contact"}{" "}
           {isSumbitting && <Spinner />}
         </Button>
       </form>
+      {!file && !previewUrl && contact?.image && (
+        <>
+          <div className="flex">
+            <img
+              src={contact?.image}
+              alt={contact?.name}
+              width={200}
+              height={200}
+            />
+            <div className="align place-self-center">
+              <DeleteImageButton contact={contact} />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

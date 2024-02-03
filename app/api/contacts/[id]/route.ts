@@ -1,5 +1,5 @@
 import authOptions from "@/app/auth/authOptions";
-import { contactSchema } from "@/app/contactSchema";
+import { patchContactSchema } from "@/app/contactSchema";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -8,29 +8,33 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({}, { status: 401 });
+  // const session = await getServerSession(authOptions);
+  // if (!session) return NextResponse.json({}, { status: 401 });
   const body = await request.json();
-  const validation = contactSchema.safeParse(body);
+  const validation = patchContactSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
+  const { name, business, address, phone, email, notes, image } = body;
   const contact = await prisma.contact.findUnique({
     where: { id: parseInt(params.id) },
   });
   if (!contact)
     return NextResponse.json({ error: "Invaild contact" }, { status: 404 });
+  if (body.image) {
+  }
   const updatedContact = await prisma.contact.update({
     where: { id: contact.id },
     data: {
-      name: body.name,
-      business: body.business,
-      address: body.address,
-      phone: body.phone,
-      email: body.email,
-      notes: body.notes,
-      image: body.image,
+      name,
+      business,
+      address,
+      phone,
+      email,
+      notes,
+      image,
     },
   });
+
   return NextResponse.json(updatedContact);
 }
 
