@@ -4,13 +4,6 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 import { commentSchema } from "@/app/comments/commentSchema";
 
-export async function GET(request: NextRequest) {
-  // const session = await getServerSession(authOptions);
-  // if (!session) return NextResponse.json({}, { status: 401 });
-  const comments = await prisma.comment.findMany();
-  return NextResponse.json(comments);
-}
-
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({}, { status: 401 });
