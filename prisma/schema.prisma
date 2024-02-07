@@ -18,6 +18,18 @@ model Contact {
   address  String
   business String
   image String?
+  comments Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  comment   String
+  contactId Int
+  contact Contact @relation(fields: [contactId], references: [id])
+  userEmail String
+  user User @relation(fields: [userEmail], references: [email])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 
@@ -52,11 +64,12 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
-  sessions      Session[]
+  sessions      Session[]  
+  comments      Comment[]
 }
 
 model VerificationToken {

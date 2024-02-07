@@ -1,8 +1,9 @@
-import { Box, Flex, Grid, Heading, Text } from "@radix-ui/themes";
+import { Box, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import React from "react";
 import { MdLocalPhone, MdOutlineAlternateEmail } from "react-icons/md";
 import { Contact } from "@prisma/client";
 import Image from "next/image";
+import CommentForm from "@/app/comments/CommentForm";
 
 const ContactDetails = ({ contact }: { contact: Contact }) => {
   return (
@@ -25,6 +26,14 @@ const ContactDetails = ({ contact }: { contact: Contact }) => {
             height={200}
           />
         )}
+      </Box>
+      <Box>
+        <Card>
+          <Text>Notes</Text>
+        </Card>
+      </Box>
+      <Box>
+        <CommentForm contact={contact} />
       </Box>
     </>
   );

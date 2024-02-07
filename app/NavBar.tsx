@@ -38,6 +38,7 @@ const NavLinks = () => {
   const links = [
     { label: "Home", href: "/" },
     { label: "Contacts", href: "/contacts/list" },
+    { label: "Comments", href: "/comments" },
   ];
   return (
     <ul className="flex space-x-6 ">
