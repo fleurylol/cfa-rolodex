@@ -6,6 +6,7 @@ import { Container, Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import AuthProvider from "./auth/Provider";
 import { EdgeStoreProvider } from "./libs/edgestore";
+import QueryClientProvider from "./QueryClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,16 +23,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>
-          <Theme accentColor="red">
-            <NavBar />
-            <main className="p-5">
-              <Container>
-                <EdgeStoreProvider>{children}</EdgeStoreProvider>
-              </Container>
-            </main>
-          </Theme>
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Theme accentColor="red">
+              <NavBar />
+              <main className="p-5">
+                <Container>
+                  <EdgeStoreProvider>{children}</EdgeStoreProvider>
+                </Container>
+              </main>
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
