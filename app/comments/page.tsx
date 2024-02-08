@@ -1,10 +1,14 @@
 import React from "react";
-import CommentForm from "./CommentForm";
-import { User } from "@prisma/client";
-import prisma from "@/prisma/client";
+import CommentBox from "./_components/CommentBox";
+import { Box, Flex } from "@radix-ui/themes";
 
 const CommentPage = () => {
-  return;
+  return (
+    <>
+        <CommentBox />
+        <CommentBox />
+    </>
+  );
 };
 
 export default CommentPage;

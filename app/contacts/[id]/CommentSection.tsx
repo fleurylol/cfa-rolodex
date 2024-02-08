@@ -14,7 +14,7 @@ const CommentSection = ({ contact }: { contact: Contact }) => {
       </Box>
       <Box>
         <CommentForm contact={contact} />
-      </Box>
+      </Box> 
       <Box>
         <Card>
           <Text>Comments</Text>
