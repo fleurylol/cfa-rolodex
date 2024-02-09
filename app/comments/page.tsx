@@ -1,12 +1,10 @@
 import React from "react";
-import CommentBox from "./_components/CommentBox";
-import { Box, Flex } from "@radix-ui/themes";
+import EditComment from "./_components/EditComment";
 
 const CommentPage = () => {
   return (
     <>
-        <CommentBox />
-        <CommentBox />
+      <EditComment />
     </>
   );
 };

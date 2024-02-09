@@ -19,16 +19,18 @@ const CommentBox: React.FC<CommentBoxProps> = ({
     <>
       <Box className="border rounded-md p-3 mb-3">
         <Flex justify="between" className="mb-4">
-          <Text size="6" className="self-end">
+          <Text size="4" className="self-end">
             {userEmail}
           </Text>
           <Flex direction="column">
-            <Text size="2">
-              Updated at: {new Date(updatedAt).toLocaleDateString()}{" "}
+            <Text size="3">
+              Updated at: {new Date(updatedAt).toLocaleDateString()}
+              {" | "}
               {new Date(updatedAt).toLocaleTimeString()}
             </Text>
-            <Text size="2">
-              Updated at: {new Date(createdAt).toLocaleDateString()}{" "}
+            <Text size="3">
+              Updated at: {new Date(createdAt).toLocaleDateString()}
+              {" | "}
               {new Date(createdAt).toLocaleTimeString()}
             </Text>
           </Flex>

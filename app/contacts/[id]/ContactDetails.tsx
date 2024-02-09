@@ -21,8 +21,8 @@ const ContactDetails = ({ contact }: { contact: Contact }) => {
           <Image
             src={contact.image}
             alt={contact.name}
-            width={200}
-            height={200}
+            width={400}
+            height={400}
           />
         )}
       </Box>
