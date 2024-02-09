@@ -23,7 +23,7 @@ model Contact {
 
 model Comment {
   id        Int      @id @default(autoincrement())
-  comment   String
+  comment   String @db.Text
   contactId Int
   contact Contact @relation(fields: [contactId], references: [id])
   userEmail String

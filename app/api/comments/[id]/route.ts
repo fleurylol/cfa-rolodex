@@ -17,3 +17,18 @@ export async function GET(
     return NextResponse.json({ error: "Invaild comment" }, { status: 404 });
   return NextResponse.json(comment);
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+  const comment = await prisma.comment.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+  if (!comment)
+    return NextResponse.json({ error: "Invaild comment" }, { status: 404 });
+  await prisma.comment.delete({ where: { id: parseInt(params.id) } });
+  return NextResponse.json({ message: "Comment deleted" });
+}

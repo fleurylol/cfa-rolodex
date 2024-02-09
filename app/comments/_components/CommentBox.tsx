@@ -3,6 +3,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogRoot,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -20,6 +21,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Spinner } from "@/app/components";
+import DeleteCommentButton from "./DeleteCommentButton";
+import { set } from "zod";
 
 type CommentBoxProps = {
   key: number;
@@ -44,8 +47,8 @@ const CommentBox: React.FC<CommentBoxProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const router = useRouter();
   const [isSumbitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   const [commentData, setCommentData] = useState(comment);
   const [updatedTime, setUpdatedTime] = useState(updatedAt);
 
@@ -60,7 +63,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
       setSubmitting(false);
     } catch (error) {
       setSubmitting(false);
-      console.error("Failed to update comment", error);
+      setError(true);
     }
   });
   return (
@@ -74,12 +77,18 @@ const CommentBox: React.FC<CommentBoxProps> = ({
             <Text size="3">
               Updated at: {new Date(updatedTime).toLocaleDateString()}
               {" | "}
-              {new Date(updatedTime).toLocaleTimeString()}
+              {new Date(updatedTime).toLocaleTimeString(undefined, {
+                hour: "numeric",
+                minute: "2-digit",
+              })}
             </Text>
             <Text size="3">
               Created at: {new Date(createdAt).toLocaleDateString()}
               {" | "}
-              {new Date(createdAt).toLocaleTimeString()}
+              {new Date(createdAt).toLocaleTimeString(undefined, {
+                hour: "numeric",
+                minute: "2-digit",
+              })}
             </Text>
           </Flex>
         </Flex>
@@ -87,37 +96,58 @@ const CommentBox: React.FC<CommentBoxProps> = ({
           <Text size="1">{commentData}</Text>
         </Box>
         {isOwner && (
-          <AlertDialogRoot>
-            <AlertDialogTrigger>
-              <Button color="green" disabled={isSumbitting}>
-                <Pencil2Icon />
-                Edit {isSumbitting && <Spinner />}
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogTitle>Editing {commentId}</AlertDialogTitle>
-              <form onSubmit={onSubmit}>
-                <TextFieldRoot>
-                  <TextFieldInput
-                    defaultValue={comment}
-                    {...register("comment")}
-                  />
-                </TextFieldRoot>
-                <Flex mt="4" gap={"3"}>
-                  <AlertDialogAction>
-                    <Button color="blue" type="submit">
-                      Save
-                    </Button>
-                  </AlertDialogAction>
-                  <AlertDialogCancel>
-                    <Button variant="soft" color="gray">
-                      Cancel
-                    </Button>
-                  </AlertDialogCancel>
-                </Flex>
-              </form>
-            </AlertDialogContent>
-          </AlertDialogRoot>
+          <Flex mt="4" gap={"3"}>
+            <AlertDialogRoot>
+              <AlertDialogTrigger>
+                <Button color="green" disabled={isSumbitting}>
+                  <Pencil2Icon />
+                  Edit {isSumbitting && <Spinner />}
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogTitle>Editing {commentId}</AlertDialogTitle>
+                <form onSubmit={onSubmit}>
+                  <TextFieldRoot>
+                    <TextFieldInput
+                      defaultValue={comment}
+                      {...register("comment")}
+                    />
+                  </TextFieldRoot>
+                  <Flex mt="4" gap={"3"}>
+                    <AlertDialogAction>
+                      <Button color="blue" type="submit">
+                        Save
+                      </Button>
+                    </AlertDialogAction>
+                    <AlertDialogCancel>
+                      <Button variant="soft" color="gray">
+                        Cancel
+                      </Button>
+                    </AlertDialogCancel>
+                  </Flex>
+                </form>
+              </AlertDialogContent>
+            </AlertDialogRoot>
+            <AlertDialogRoot open={error}>
+              <AlertDialogContent>
+                <AlertDialogTitle>Error</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Aw man something isnt working
+                </AlertDialogDescription>
+                <Button
+                  variant="soft"
+                  color="gray"
+                  mt={"2"}
+                  onClick={() => setError(false)}
+                >
+                  OK
+                </Button>
+              </AlertDialogContent>
+            </AlertDialogRoot>
+            <DeleteCommentButton
+              commentId={commentId}
+            />
+          </Flex>
         )}
       </Box>
     </>
