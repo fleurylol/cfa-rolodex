@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Contact } from "@prisma/client";
 import CommentBox from "@/app/comments/_components/CommentBox";
-import { Text } from "@radix-ui/themes";
 
 type Comment = {
   id: number;
@@ -22,7 +21,7 @@ const CommentList = ({ contact }: { contact: Contact }) => {
   } = useQuery<Comment[]>({
     queryKey: ["comments", contact.id],
     queryFn: () =>
-      axios.get(`/api/comments/${contact.id}`).then((res) => res.data),
+      axios.get(`/api/comments/contact/${contact.id}`).then((res) => res.data),
     staleTime: 60 * 1000,
   });
   return (
@@ -33,6 +32,7 @@ const CommentList = ({ contact }: { contact: Contact }) => {
         comments?.map((comment: Comment) => (
           <CommentBox
             key={comment.id}
+            commentId={comment.id}
             comment={comment.comment}
             userEmail={comment.userEmail}
             createdAt={comment.createdAt}

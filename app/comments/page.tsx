@@ -1,5 +1,5 @@
 import React from "react";
-import EditComment from "./_components/EditComment";
+import EditComment from "./_components/EditCommentButton";
 
 const CommentPage = () => {
   return (

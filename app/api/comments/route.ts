@@ -22,3 +22,21 @@ export async function POST(request: NextRequest) {
   });
   return NextResponse.json(newComment, { status: 201 });
 }
+
+export async function PATCH(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+  const body = await request.json();
+  const validation = commentSchema.safeParse(body);
+  if (!validation.success)
+    return NextResponse.json(validation.error.format(), { status: 400 });
+  const { comment, commentId } = body;
+  const updatedComment = await prisma.comment.update({
+    where: { id: commentId },
+    data: {
+      comment,
+      updatedAt: new Date(),
+    },
+  });
+  return NextResponse.json(updatedComment);
+}
