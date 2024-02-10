@@ -23,9 +23,9 @@ const BusinessesPage = async () => {
             <TableColumnHeaderCell className="hidden md:table-cell">
               Address
             </TableColumnHeaderCell>
-            <TableColumnHeaderCell className="hidden md:table-cell">
+            {/* <TableColumnHeaderCell className="hidden md:table-cell">
               Phone
-            </TableColumnHeaderCell>
+            </TableColumnHeaderCell> */}
           </TableRow>
         </TableHeader>
         <TableBody>

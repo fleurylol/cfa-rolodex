@@ -1,9 +1,9 @@
-import CreateBusinessButton from "./CreateBusinessButton";
+import BusinessFormButton from "./BusinessFormButton";
 
 const BusinessActionBar = () => {
   return (
     <div className="mb-5">
-      <CreateBusinessButton />
+      <BusinessFormButton />
     </div>
   );
 };
