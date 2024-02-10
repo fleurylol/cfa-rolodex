@@ -15,4 +15,5 @@ export const patchContactSchema = z.object({
   address: z.string().min(1, "An address is required").optional(),
   businessName: z.string().min(1, "A business name is required").optional(),
   image: z.string().url("A valid image URL is required").optional().nullable(),
+  businessId: z.number().int().optional().nullable(),
 });

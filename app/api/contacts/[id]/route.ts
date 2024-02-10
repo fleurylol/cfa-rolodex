@@ -14,13 +14,18 @@ export async function PATCH(
   const validation = patchContactSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
-  const { name, businessName, address, phone, email, image } = body;
+  const { name, businessName, address, phone, email, image, businessId } = body;
   const contact = await prisma.contact.findUnique({
     where: { id: parseInt(params.id) },
   });
   if (!contact)
     return NextResponse.json({ error: "Invaild contact" }, { status: 404 });
-  if (body.image) {
+  if (businessId) {
+    const business = await prisma.business.findUnique({
+      where: { id: businessId },
+    });
+    if (!business)
+      return NextResponse.json({ error: "Invaild business" }, { status: 404 });
   }
   const updatedContact = await prisma.contact.update({
     where: { id: contact.id },
@@ -31,6 +36,7 @@ export async function PATCH(
       phone,
       email,
       image,
+      businessId,
     },
   });
 

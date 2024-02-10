@@ -4,6 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { businessSchema } from "./businessSchema";
 import prisma from "@/prisma/client";
 
+export async function GET() {
+  const businesses = await prisma.business.findMany();
+  return NextResponse.json(businesses);
+}
+
 export async function POST(resquest: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({}, { status: 401 });

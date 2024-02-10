@@ -7,6 +7,7 @@ import DeleteContactButton from "./DeleteContactButton";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 import CommentSection from "./CommentSection";
+import BusinessSelect from "./BusinessSelect";
 
 interface Props {
   params: { id: string };
@@ -29,6 +30,7 @@ const ContactDetailPage = async ({ params }: Props) => {
       {session && (
         <Box>
           <Flex direction="column" gap="4">
+            <BusinessSelect contact={contact} />
             <EditContactButton contactId={contact.id} />
             <DeleteContactButton contact={contact} />
           </Flex>
