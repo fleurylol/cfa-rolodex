@@ -9,7 +9,7 @@ const ContactDetails = ({ contact }: { contact: Contact }) => {
     <>
       <Grid className="max-w-xl">
         <Heading>{contact.name}</Heading>
-        <Text size="4">{contact.business}</Text>
+        <Text size="4">{contact.businessName}</Text>
         <Text>{contact.address}</Text>
         <Flex gap={"3"}>
           <MdLocalPhone size={"24"} /> <Text>{contact.phone}</Text>

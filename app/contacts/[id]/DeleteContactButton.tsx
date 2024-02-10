@@ -26,9 +26,11 @@ const DeleteContactButton = ({ contact }: { contact: Contact }) => {
   const deleteContact = async () => {
     try {
       setDeleting(true);
-      await edgestore.publicFiles.delete({
-        url: contact.image as string,
-      });
+      if (contact.image !== null) {
+        await edgestore.publicFiles.delete({
+          url: contact.image as string,
+        });
+      }
       await axios.delete("/api/contacts/" + contact.id);
       router.push("/contacts/list");
       router.refresh();

@@ -131,12 +131,12 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
           <Box>
             <TextFieldRoot>
               <TextFieldInput
-                defaultValue={contact?.business}
+                defaultValue={contact?.businessName}
                 placeholder="Business"
-                {...register("business")}
+                {...register("businessName")}
               />
             </TextFieldRoot>
-            <ErrorMessage>{errors.business?.message}</ErrorMessage>
+            <ErrorMessage>{errors.businessName?.message}</ErrorMessage>
           </Box>
           <Box>
             <TextFieldRoot>

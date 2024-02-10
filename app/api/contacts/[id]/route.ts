@@ -14,7 +14,7 @@ export async function PATCH(
   const validation = patchContactSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
-  const { name, business, address, phone, email, image } = body;
+  const { name, businessName, address, phone, email, image } = body;
   const contact = await prisma.contact.findUnique({
     where: { id: parseInt(params.id) },
   });
@@ -26,7 +26,7 @@ export async function PATCH(
     where: { id: contact.id },
     data: {
       name,
-      business,
+      businessName,
       address,
       phone,
       email,

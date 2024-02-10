@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Contact } from "@prisma/client";
 import CommentBox from "@/app/comments/_components/CommentBox";
+import { Spinner } from "@/app/components";
 
 type Comment = {
   id: number;
@@ -26,7 +27,12 @@ const CommentList = ({ contact }: { contact: Contact }) => {
   });
   return (
     <>
-      {isLoading && <p>Loading comments...</p>}
+      {isLoading && (
+        <>
+          <p>Loading comments... </p>
+          <Spinner />
+        </>
+      )}
       {error && <p>Error loading comments: {error.message}</p>}
       {comments &&
         comments?.map((comment: Comment) => (

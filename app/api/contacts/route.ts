@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       email: body.email,
       phone: body.phone,
       address: body.address,
-      business: body.business,
+      businessName: body.businessName,
       image: body.image,
     },
   });

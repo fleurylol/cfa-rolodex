@@ -24,7 +24,6 @@ const ContactFormSkelly = () => {
           <Skeleton height={"2rem"} />
         </Box>
       </Grid>
-      <Skeleton height={"20rem"} />
     </div>
   );
 };

@@ -34,7 +34,7 @@ const ContactsPage = async () => {
               <TableCell>
                 <Link href={`/contacts/${contact.id}`}>{contact.name}</Link>
               </TableCell>
-              <TableCell>{contact.business}</TableCell>
+              <TableCell>{contact.businessName}</TableCell>
               <TableCell className="hidden md:table-cell">
                 {contact.address}
               </TableCell>
