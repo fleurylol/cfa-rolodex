@@ -12,6 +12,7 @@ import { Business, Contact } from "@prisma/client";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/app/components";
+import toast, { Toaster } from "react-hot-toast";
 
 const BusinessSelect = ({ contact }: { contact: Contact }) => {
   const { data: businesses, error, isLoading } = useBusiness();
@@ -21,9 +22,13 @@ const BusinessSelect = ({ contact }: { contact: Contact }) => {
   if (error) return null;
   const assignBusiness = (businessId: string) => {
     const businessIdInt = parseInt(businessId);
-    axios.patch(`/api/contacts/${contact.id}`, {
-      businessId: businessIdInt || null,
-    });
+    axios
+      .patch(`/api/contacts/${contact.id}`, {
+        businessId: businessIdInt || null,
+      })
+      .catch(() => {
+        toast.error("Changes could not be saved.");
+      });
   };
   return (
     <>
@@ -44,6 +49,7 @@ const BusinessSelect = ({ contact }: { contact: Contact }) => {
           </SelectGroup>
         </SelectContent>
       </SelectRoot>
+      <Toaster />
     </>
   );
 };
@@ -52,8 +58,6 @@ const useBusiness = () =>
   useQuery<Business[]>({
     queryKey: ["name"],
     queryFn: () => axios.get("/api/business").then((res) => res.data),
-    staleTime: 60 * 1000, //60s
-    retry: 3,
   });
 
 export default BusinessSelect;
