@@ -45,6 +45,7 @@ const CommentList = ({ contact }: { contact: Contact }) => {
             updatedAt={comment.updatedAt}
           />
         ))}
+      {comments && comments.length === 0 && <p>No comments yet</p>}
     </>
   );
 };
