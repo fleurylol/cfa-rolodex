@@ -1,7 +1,13 @@
 "use client";
-import { Button, Text, TextFieldRoot, TextFieldInput } from "@radix-ui/themes";
+import {
+  Button,
+  Text,
+  TextFieldRoot,
+  TextFieldInput,
+  Card,
+} from "@radix-ui/themes";
 import React, { useState } from "react";
-import { User, Contact } from "@prisma/client";
+import { Contact } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { commentSchema } from "./commentSchema";
@@ -41,14 +47,15 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <Text>{userEmail}</Text>
-        <TextFieldRoot>
-          <TextFieldInput {...register("comment")} />
-        </TextFieldRoot>
-        <ErrorMessage>{errors.comment?.message}</ErrorMessage>
-        <Button type="submit" disabled={isSumbitting}>
-          Submit {isSumbitting && <Spinner />}
-        </Button>
+        <Card className="mb-3">
+          <TextFieldRoot className="mb-3">
+            <TextFieldInput {...register("comment")} />
+          </TextFieldRoot>
+          <ErrorMessage>{errors.comment?.message}</ErrorMessage>
+          <Button type="submit" disabled={isSumbitting}>
+            Add Note {isSumbitting && <Spinner />}
+          </Button>
+        </Card>
       </form>
     </>
   );

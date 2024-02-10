@@ -1,4 +1,6 @@
 "use client";
+import { Spinner } from "@/app/components";
+import { Pencil2Icon } from "@radix-ui/react-icons";
 import {
   AlertDialogAction,
   AlertDialogCancel,
@@ -10,19 +12,16 @@ import {
   Box,
   Button,
   Flex,
+  Grid,
   Text,
   TextFieldInput,
   TextFieldRoot,
 } from "@radix-ui/themes";
-import React, { useState } from "react";
-import { useSession } from "next-auth/react";
-import { Pencil2Icon } from "@radix-ui/react-icons";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Spinner } from "@/app/components";
 import DeleteCommentButton from "./DeleteCommentButton";
-import { set } from "zod";
 
 type CommentBoxProps = {
   key: number;
@@ -69,31 +68,37 @@ const CommentBox: React.FC<CommentBoxProps> = ({
   return (
     <>
       <Box className="border rounded-md p-3 mb-3">
-        <Flex justify="between" className="mb-4">
-          <Text size="4" className="self-end">
-            {userEmail}
-          </Text>
-          <Flex direction="column">
-            <Text size="3">
-              Updated at: {new Date(updatedTime).toLocaleDateString()}
-              {" | "}
-              {new Date(updatedTime).toLocaleTimeString(undefined, {
-                hour: "numeric",
-                minute: "2-digit",
-              })}
+        <Grid>
+          <Flex
+            direction={{ initial: "column", sm: "row" }}
+            justify="between"
+            className="mb-4"
+          >
+            <Text size="4" className="sm:self-start lg:self-end">
+              {userEmail}
             </Text>
-            <Text size="3">
-              Created at: {new Date(createdAt).toLocaleDateString()}
-              {" | "}
-              {new Date(createdAt).toLocaleTimeString(undefined, {
-                hour: "numeric",
-                minute: "2-digit",
-              })}
-            </Text>
+            <Flex direction="column">
+              <Text size="2">
+                Updated at: {new Date(updatedTime).toLocaleDateString()}
+                {" | "}
+                {new Date(updatedTime).toLocaleTimeString(undefined, {
+                  hour: "numeric",
+                  minute: "2-digit",
+                })}
+              </Text>
+              <Text size="2">
+                Created at: {new Date(createdAt).toLocaleDateString()}
+                {" | "}
+                {new Date(createdAt).toLocaleTimeString(undefined, {
+                  hour: "numeric",
+                  minute: "2-digit",
+                })}
+              </Text>
+            </Flex>
           </Flex>
-        </Flex>
+        </Grid>
         <Box className="border rounded-md p-3">
-          <Text size="1">{commentData}</Text>
+          <Text size="2">{commentData}</Text>
         </Box>
         {isOwner && (
           <Flex mt="4" gap={"3"}>
@@ -105,7 +110,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
-                <AlertDialogTitle>Editing {commentId}</AlertDialogTitle>
+                <AlertDialogTitle>Editing</AlertDialogTitle>
                 <form onSubmit={onSubmit}>
                   <TextFieldRoot>
                     <TextFieldInput
@@ -144,9 +149,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
                 </Button>
               </AlertDialogContent>
             </AlertDialogRoot>
-            <DeleteCommentButton
-              commentId={commentId}
-            />
+            <DeleteCommentButton commentId={commentId} />
           </Flex>
         )}
       </Box>
