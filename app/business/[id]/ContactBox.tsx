@@ -1,5 +1,6 @@
 import React from "react";
-import { Text } from "@radix-ui/themes";
+import { Box, Flex, Text } from "@radix-ui/themes";
+import { Link } from "@/app/components";
 
 type ContactBoxProps = {
   key: number;
@@ -9,7 +10,14 @@ type ContactBoxProps = {
 };
 
 const ContactBox: React.FC<ContactBoxProps> = ({ contactId, name, image }) => {
-  return <Text>{name}</Text>;
+  return (
+    <>
+      <Flex direction={"column"}>
+        <Text>{name}</Text>
+        <Link href={`/contacts/${contactId}`}>View Contact</Link>
+      </Flex>
+    </>
+  );
 };
 
 export default ContactBox;

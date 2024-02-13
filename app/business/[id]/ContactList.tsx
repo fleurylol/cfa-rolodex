@@ -17,17 +17,16 @@ const ContactList = ({ business }: { business: Business }) => {
       axios
         .get(`/api/business/contacts/${business.id}`)
         .then((res) => res.data),
-    staleTime: 60 * 1000,
   });
   return (
     <>
       {isLoading && (
         <>
-          <p>Loading comments... </p>
+          <p>Loading contacts... </p>
           <Spinner />
         </>
       )}
-      {error && <p>Error loading comments: {error.message}</p>}
+      {error && <p>Error loading contacts: {error.message}</p>}
       {contacts &&
         contacts?.map((contact: Contact) => (
           <ContactBox
