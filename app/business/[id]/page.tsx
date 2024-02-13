@@ -1,6 +1,7 @@
 import React from "react";
-import { Heading } from "@radix-ui/themes";
+import { Heading, Text, Box } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
+import ContactList from "./ContactList";
 interface Props {
   params: { id: string };
 }
@@ -15,8 +16,12 @@ const BusinessDetailPage = async ({ params }: Props) => {
   const { name, address } = business;
   return (
     <>
-      <Heading>{name}</Heading>
-      <Heading>{address}</Heading>
+      <Box>
+        <Heading>{name}</Heading>
+        <Text>{address}</Text>
+      </Box>
+      <Text>Contacts: </Text>
+      <ContactList business={business}/>
     </>
   );
 };

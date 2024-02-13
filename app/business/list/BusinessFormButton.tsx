@@ -18,16 +18,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ErrorMessage } from "@/app/components";
 type BusinessFormData = z.infer<typeof businessSchema>;
 
 const BusinessFormButton = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<BusinessFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<BusinessFormData>({
     resolver: zodResolver(businessSchema),
   });
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     try {
-      axios.post("/api/business", data);
+      await axios.post("/api/business", data);
       router.push("/business/list");
       router.refresh();
     } catch (error) {
@@ -49,12 +54,14 @@ const BusinessFormButton = () => {
                 {...register("name")}
               />
             </TextFieldRoot>
+            <ErrorMessage>{errors.name?.message}</ErrorMessage>
             <TextFieldRoot>
               <TextFieldInput
                 placeholder="Business Address"
                 {...register("address")}
               />
             </TextFieldRoot>
+            <ErrorMessage>{errors.address?.message}</ErrorMessage>
           </Grid>
 
           <Flex mt="4" gap={"3"}>
