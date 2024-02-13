@@ -4,6 +4,8 @@ import prisma from "@/prisma/client";
 import ContactList from "./ContactList";
 import authOptions from "@/app/auth/authOptions";
 import { getServerSession } from "next-auth";
+import BusinessFormButton from "../list/BusinessFormButton";
+import EditBusinessButton from "./EditBusinessButton";
 interface Props {
   params: { id: string };
 }
@@ -33,7 +35,7 @@ const BusinessDetailPage = async ({ params }: Props) => {
         {session && (
           <Box>
             <Flex direction="column" gap="4">
-              <Button></Button>
+              <EditBusinessButton business={business}/>
               <Button></Button>
             </Flex>
           </Box>
