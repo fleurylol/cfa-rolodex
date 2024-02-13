@@ -39,7 +39,6 @@ const NavLinks = () => {
     { label: "Home", href: "/" },
     { label: "Contacts", href: "/contacts/list" },
     { label: "Businesses", href: "/business/list" },
-    { label: "Comments", href: "/comments" },
   ];
   return (
     <ul className="flex space-x-6 ">
