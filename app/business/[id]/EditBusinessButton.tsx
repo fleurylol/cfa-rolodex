@@ -28,10 +28,14 @@ const EditBusinessButton = ({ business }: { business: Business }) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<BusinessFormData>({
     resolver: zodResolver(businessSchema),
   });
+  const name = watch("name");
+  const address = watch("address");
+  const isSubmitable = !name || !address;
   const onSubmit = handleSubmit(async (data) => {
     try {
       await axios.patch(`/api/business/${business.id}`, data);
@@ -73,7 +77,7 @@ const EditBusinessButton = ({ business }: { business: Business }) => {
 
           <Flex mt="4" gap={"3"}>
             <AlertDialogAction>
-              <Button color="blue" type="submit">
+              <Button color="blue" type="submit" disabled={isSubmitable}>
                 Update
               </Button>
             </AlertDialogAction>

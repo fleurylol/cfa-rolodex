@@ -26,10 +26,14 @@ const BusinessFormButton = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<BusinessFormData>({
     resolver: zodResolver(businessSchema),
   });
+  const name = watch("name");
+  const address = watch("address");
+  const isSubmitable = !name || !address;
   const onSubmit = handleSubmit(async (data) => {
     try {
       await axios.post("/api/business", data);
@@ -66,7 +70,7 @@ const BusinessFormButton = () => {
 
           <Flex mt="4" gap={"3"}>
             <AlertDialogAction>
-              <Button color="blue" type="submit">
+              <Button color="blue" type="submit" disabled={isSubmitable}>
                 Create
               </Button>
             </AlertDialogAction>
