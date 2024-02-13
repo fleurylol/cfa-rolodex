@@ -6,6 +6,7 @@ import authOptions from "@/app/auth/authOptions";
 import { getServerSession } from "next-auth";
 import BusinessFormButton from "../list/BusinessFormButton";
 import EditBusinessButton from "./EditBusinessButton";
+import DeleteBusinessButton from "./DeleteBusinessButton";
 interface Props {
   params: { id: string };
 }
@@ -35,8 +36,8 @@ const BusinessDetailPage = async ({ params }: Props) => {
         {session && (
           <Box>
             <Flex direction="column" gap="4">
-              <EditBusinessButton business={business}/>
-              <Button></Button>
+              <EditBusinessButton business={business} />
+              <DeleteBusinessButton business={business} />
             </Flex>
           </Box>
         )}

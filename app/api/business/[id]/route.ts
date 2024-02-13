@@ -29,3 +29,18 @@ export async function PATCH(
   });
   return NextResponse.json(updatedBusiness);
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+  const business = await prisma.business.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+  if (!business)
+    return NextResponse.json({ error: "Invalid business" }, { status: 404 });
+  await prisma.business.delete({ where: { id: business.id } });
+  return NextResponse.json({ success: true });
+}
