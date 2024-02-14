@@ -8,7 +8,16 @@ import {
   TableRow,
 } from "@radix-ui/themes";
 import { Link } from "../../components";
+import NextLink from "next/link";
 import ContactActionBar from "./ContactActionBar";
+import { Contact } from "@prisma/client";
+
+const columns: { label: string; value: keyof Contact; className?: string }[] = [
+  { label: "Name", value: "name" },
+  { label: "Business", value: "businessName" },
+  { label: "Address", value: "address", className: "hidden md:table-cell" },
+  { label: "Phone", value: "phone", className: "hidden md:table-cell" },
+];
 
 const ContactsPage = async () => {
   const contacts = await prisma.contact.findMany();
@@ -18,14 +27,13 @@ const ContactsPage = async () => {
       <TableRoot variant="surface">
         <TableHeader>
           <TableRow>
-            <TableColumnHeaderCell>Name</TableColumnHeaderCell>
-            <TableColumnHeaderCell>Business</TableColumnHeaderCell>
-            <TableColumnHeaderCell className="hidden md:table-cell">
-              Address
-            </TableColumnHeaderCell>
-            <TableColumnHeaderCell className="hidden md:table-cell">
-              Phone
-            </TableColumnHeaderCell>
+            {columns.map((column) => (
+              <TableColumnHeaderCell key={column.value}>
+                <NextLink href={`/contacts/list?orderBy=${column.value}`}>
+                  {column.label}
+                </NextLink>
+              </TableColumnHeaderCell>
+            ))}
           </TableRow>
         </TableHeader>
         <TableBody>
