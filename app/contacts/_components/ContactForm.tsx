@@ -174,14 +174,14 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
       </form>
       {!file && !previewUrl && contact?.image && (
         <>
-          <div className="flex">
+          <div className="flex mt-2">
             <img
               src={contact?.image}
               alt={contact?.name}
               width={200}
               height={200}
             />
-            <div className="align place-self-center">
+            <div className="align place-self-center ml-2">
               <DeleteImageButton contact={contact} />
             </div>
           </div>
