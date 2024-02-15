@@ -11,10 +11,11 @@ import { Link } from "../../components";
 import NextLink from "next/link";
 import ContactActionBar from "./ContactActionBar";
 import { Contact } from "@prisma/client";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
+import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 
 export interface ContactQuery {
   orderBy: keyof Contact;
+  sortDirection: "asc" | "desc";
   page: string;
 }
 
@@ -34,7 +35,7 @@ const ContactsPage = async ({ searchParams }: Props) => {
   const orderBy = columns
     .map((coloumn) => coloumn.value)
     .includes(searchParams.orderBy)
-    ? { [searchParams.orderBy]: "asc" }
+    ? { [searchParams.orderBy]: searchParams.sortDirection || "asc" }
     : undefined;
 
   const contacts = await prisma.contact.findMany({
@@ -48,13 +49,26 @@ const ContactsPage = async ({ searchParams }: Props) => {
         <TableHeader>
           <TableRow>
             {columns.map((column) => (
-              <TableColumnHeaderCell key={column.value}>
-                <NextLink href={`/contacts/list?orderBy=${column.value}`}>
+              <TableColumnHeaderCell
+                key={column.value}
+                className={column.className}
+              >
+                <NextLink
+                  href={`/contacts/list?orderBy=${column.value}&sortDirection=${
+                    column.value === searchParams.orderBy &&
+                    searchParams.sortDirection === "asc"
+                      ? "desc"
+                      : "asc"
+                  }`}
+                >
                   {column.label}
                 </NextLink>
-                {column.value === searchParams.orderBy && (
-                  <ArrowUpIcon className="inline" />
-                )}
+                {column.value === searchParams.orderBy &&
+                  (searchParams.sortDirection === "asc" ? (
+                    <ArrowUpIcon className="inline" />
+                  ) : (
+                    <ArrowDownIcon className="inline" />
+                  ))}
               </TableColumnHeaderCell>
             ))}
           </TableRow>
