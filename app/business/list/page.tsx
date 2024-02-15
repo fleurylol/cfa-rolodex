@@ -45,8 +45,7 @@ const BusinessesPage = async () => {
 
 export const metadata: Metadata = {
   title: "CFA Rolodex - Businesses",
-  description:
-    "A list of businesses that we have worked with in the past and present.",
+  description: "A list of businesses that we and their contacts.",
 };
 
 export default BusinessesPage;
