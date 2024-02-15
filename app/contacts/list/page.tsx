@@ -12,6 +12,7 @@ import NextLink from "next/link";
 import ContactActionBar from "./ContactActionBar";
 import { Contact } from "@prisma/client";
 import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
+import Pagination from "../_components/Pagination";
 
 export interface ContactQuery {
   orderBy: keyof Contact;
@@ -38,9 +39,16 @@ const ContactsPage = async ({ searchParams }: Props) => {
     ? { [searchParams.orderBy]: searchParams.sortDirection || "asc" }
     : undefined;
 
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
+
   const contacts = await prisma.contact.findMany({
     orderBy,
+    skip: (page - 1) * pageSize,
+    take: pageSize,
   });
+
+  const contactCount = await prisma.contact.count();
 
   return (
     <div>
@@ -90,6 +98,11 @@ const ContactsPage = async ({ searchParams }: Props) => {
           ))}
         </TableBody>
       </TableRoot>
+      <Pagination
+        itemCount={contactCount}
+        pageSize={pageSize}
+        currentPage={page}
+      />
     </div>
   );
 };
