@@ -40,4 +40,15 @@ const ContactDetailPage = async ({ params }: Props) => {
   );
 };
 
+export async function generateMetadata({ params }: Props) {
+  const contact = await prisma.contact.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+
+  return {
+    title: contact?.name,
+    description: "Details for " + contact?.name,
+  };
+}
+
 export default ContactDetailPage;

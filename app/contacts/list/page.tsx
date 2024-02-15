@@ -4,6 +4,7 @@ import Pagination from "../_components/Pagination";
 import ContactActionBar from "./ContactActionBar";
 import ContactTable, { ContactQuery, columnNames } from "./ContactTable";
 import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 interface Props {
   searchParams: ContactQuery;
@@ -37,5 +38,11 @@ const ContactsPage = async ({ searchParams }: Props) => {
       />
     </Flex>
   );
+};
+
+export const metadata: Metadata = {
+  title: "CFA Rolodex - Contacts",
+  description:
+    "A rolodex of our catering guests contact information as as well as other important details.",
 };
 export default ContactsPage;

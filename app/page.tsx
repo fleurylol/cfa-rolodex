@@ -1,15 +1,10 @@
-import Pagination from "./contacts/_components/Pagination";
+import { Metadata } from "next";
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
-  return (
-    <Pagination
-      itemCount={100}
-      pageSize={10}
-      currentPage={parseInt(searchParams.page)}
-    />
-  );
+export default function Home() {
+  return <div>Hello!</div>;
 }
+
+export const metadata: Metadata = {
+  title: "CFA Rolodex - Home",
+  description: "Home page",
+};
