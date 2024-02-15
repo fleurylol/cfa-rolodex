@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/themes";
 import { Link } from "../../components";
 import prisma from "@/prisma/client";
+import { Metadata } from "next";
 
 const BusinessesPage = async () => {
   const business = await prisma.business.findMany();
@@ -40,6 +41,12 @@ const BusinessesPage = async () => {
       </TableRoot>
     </>
   );
+};
+
+export const metadata: Metadata = {
+  title: "CFA Rolodex - Businesses",
+  description:
+    "A list of businesses that we have worked with in the past and present.",
 };
 
 export default BusinessesPage;
