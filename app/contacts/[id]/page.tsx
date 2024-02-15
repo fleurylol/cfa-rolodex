@@ -8,16 +8,21 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 import CommentSection from "./CommentSection";
 import BusinessSelect from "./BusinessSelect";
+import { cache } from "react";
 
 interface Props {
   params: { id: string };
 }
 
+const fetchContact = cache((contactId: number) =>
+  prisma.contact.findUnique({
+    where: { id: contactId },
+  })
+);
+
 const ContactDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
-  const contact = await prisma.contact.findUnique({
-    where: { id: parseInt(params.id) },
-  });
+  const contact = await fetchContact(parseInt(params.id));
 
   if (!contact) notFound();
 
@@ -41,9 +46,7 @@ const ContactDetailPage = async ({ params }: Props) => {
 };
 
 export async function generateMetadata({ params }: Props) {
-  const contact = await prisma.contact.findUnique({
-    where: { id: parseInt(params.id) },
-  });
+  const contact = await fetchContact(parseInt(params.id));
 
   return {
     title: contact?.name,
