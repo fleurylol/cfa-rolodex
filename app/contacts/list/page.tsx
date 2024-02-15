@@ -11,6 +11,17 @@ import { Link } from "../../components";
 import NextLink from "next/link";
 import ContactActionBar from "./ContactActionBar";
 import { Contact } from "@prisma/client";
+import { ArrowUpIcon } from "@radix-ui/react-icons";
+
+export interface ContactQuery {
+  orderBy: keyof Contact;
+  page: string;
+}
+
+interface Props {
+  searchParams: ContactQuery;
+  contacts: Contact[];
+}
 
 const columns: { label: string; value: keyof Contact; className?: string }[] = [
   { label: "Name", value: "name" },
@@ -19,8 +30,17 @@ const columns: { label: string; value: keyof Contact; className?: string }[] = [
   { label: "Phone", value: "phone", className: "hidden md:table-cell" },
 ];
 
-const ContactsPage = async () => {
-  const contacts = await prisma.contact.findMany();
+const ContactsPage = async ({ searchParams }: Props) => {
+  const orderBy = columns
+    .map((coloumn) => coloumn.value)
+    .includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
+  const contacts = await prisma.contact.findMany({
+    orderBy,
+  });
+
   return (
     <div>
       <ContactActionBar />
@@ -32,6 +52,9 @@ const ContactsPage = async () => {
                 <NextLink href={`/contacts/list?orderBy=${column.value}`}>
                   {column.label}
                 </NextLink>
+                {column.value === searchParams.orderBy && (
+                  <ArrowUpIcon className="inline" />
+                )}
               </TableColumnHeaderCell>
             ))}
           </TableRow>
