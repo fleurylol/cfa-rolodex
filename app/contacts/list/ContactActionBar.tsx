@@ -4,7 +4,7 @@ import React from "react";
 
 const ContactActionBar = () => {
   return (
-    <div className="mb-5">
+    <div>
       <Button>
         <Link href="/contacts/new">New Contact</Link>
       </Button>
