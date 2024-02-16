@@ -1,5 +1,4 @@
 import prisma from "@/prisma/client";
-import { Contact } from "@prisma/client";
 import Pagination from "../_components/Pagination";
 import ContactActionBar from "./ContactActionBar";
 import ContactTable, { ContactQuery, columnNames } from "./ContactTable";
@@ -8,7 +7,6 @@ import { Metadata } from "next";
 
 interface Props {
   searchParams: ContactQuery;
-  contacts: Contact[];
 }
 
 const ContactsPage = async ({ searchParams }: Props) => {
