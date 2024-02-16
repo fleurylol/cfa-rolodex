@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export default function Home() {
-  return <div>Hello!</div>;
+  return <div>Hello! This is Dev branch</div>;
 }
 
 export const metadata: Metadata = {
