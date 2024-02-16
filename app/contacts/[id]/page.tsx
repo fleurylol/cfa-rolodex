@@ -23,6 +23,7 @@ const fetchContact = cache((contactId: number) =>
 const ContactDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
   const contact = await fetchContact(parseInt(params.id));
+  const isOwner = session?.user?.email === contact?.userEmail;
 
   if (!contact) notFound();
 

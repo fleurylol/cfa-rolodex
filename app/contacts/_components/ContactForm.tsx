@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEdgeStore } from "@/app/libs/edgestore";
 import DeleteImageButton from "./DeleteImageButton";
+import { useSession } from "next-auth/react";
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactForm = ({ contact }: { contact?: Contact }) => {
@@ -35,6 +36,9 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
   const [isSumbitting, setSubmitting] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email as string;
 
   const onSubmit = handleSubmit(async (data, e) => {
     e?.preventDefault();
@@ -60,7 +64,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
         router.push("/contacts/" + contact.id);
         router.refresh();
       } else {
-        await axios.post("/api/contacts", data);
+        await axios.post("/api/contacts", { ...data, userEmail });
         router.push("/contacts/list");
         router.refresh();
       }
@@ -96,6 +100,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
 
       <form className="space-y-3" onSubmit={onSubmit}>
         <Box>
+          {userEmail}
           <TextFieldRoot>
             <TextFieldInput
               defaultValue={contact?.name}

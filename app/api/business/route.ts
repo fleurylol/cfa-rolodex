@@ -13,7 +13,7 @@ export async function POST(resquest: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({}, { status: 401 });
   const body = await resquest.json();
-  const { name, address } = body;
+  const { name, address, userEmail } = body;
   const validation = businessSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 400 });
@@ -21,6 +21,7 @@ export async function POST(resquest: NextRequest) {
     data: {
       name,
       address,
+      userEmail,
     },
   });
   return NextResponse.json(newBusiness, { status: 201 });

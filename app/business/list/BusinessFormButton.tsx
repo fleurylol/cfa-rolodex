@@ -19,10 +19,13 @@ import { z } from "zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ErrorMessage } from "@/app/components";
+import { useSession } from "next-auth/react";
 type BusinessFormData = z.infer<typeof businessSchema>;
 
 const BusinessFormButton = () => {
   const router = useRouter();
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email as string;
   const {
     register,
     handleSubmit,
@@ -36,7 +39,7 @@ const BusinessFormButton = () => {
   const isSubmitable = !name || !address;
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await axios.post("/api/business", data);
+      await axios.post("/api/business", { ...data, userEmail });
       router.push("/business/list");
       router.refresh();
     } catch (error) {
