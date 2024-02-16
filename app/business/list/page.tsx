@@ -11,12 +11,16 @@ import {
 import { Link } from "../../components";
 import prisma from "@/prisma/client";
 import { Metadata } from "next";
+import authOptions from "@/app/auth/authOptions";
+import { getServerSession } from "next-auth";
 
 const BusinessesPage = async () => {
   const business = await prisma.business.findMany();
+  const session = await getServerSession(authOptions);
+
   return (
     <>
-      <BusinessActionBar />
+      {session && <BusinessActionBar />}
       <TableRoot variant="surface">
         <TableHeader>
           <TableRow>

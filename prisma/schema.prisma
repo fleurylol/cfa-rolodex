@@ -22,6 +22,8 @@ model Contact {
   businessId Int?
   business Business? @relation(fields: [businessId], references: [id])
   comments Comment[]
+  userEmail String
+  user User @relation(fields: [userEmail], references: [email])
 }
 
 model Comment {
@@ -40,6 +42,8 @@ model Business {
   name String
   address String
   contacts Contact[]
+  userEmail String
+  user User @relation(fields: [userEmail], references: [email])
 }
 
 
@@ -80,6 +84,8 @@ model User {
   accounts      Account[]
   sessions      Session[]  
   comments      Comment[]
+  contacts     Contact[]
+  businesses Business[]
 }
 
 model VerificationToken {
