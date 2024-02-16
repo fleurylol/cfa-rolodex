@@ -1,13 +1,17 @@
-import { Button } from "@radix-ui/themes";
+import { Button, Flex } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
+import SearchBar from "../_components/SearchBar";
 
 const ContactActionBar = () => {
   return (
     <div>
-      <Button>
-        <Link href="/contacts/new">New Contact</Link>
-      </Button>
+      <Flex justify={"between"}>
+        <Button>
+          <Link href="/contacts/new">New Contact</Link>
+        </Button>
+        <SearchBar />
+      </Flex>
     </div>
   );
 };
