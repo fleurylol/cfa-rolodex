@@ -101,7 +101,6 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
 
       <form className="space-y-3" onSubmit={onSubmit}>
         <Box>
-          {userEmail}
           <TextFieldRoot>
             <TextFieldInput
               defaultValue={contact?.name}
