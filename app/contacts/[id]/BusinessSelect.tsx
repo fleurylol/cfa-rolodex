@@ -13,8 +13,10 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/app/components";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const BusinessSelect = ({ contact }: { contact: Contact }) => {
+  const router = useRouter();
   const { data: businesses, error, isLoading } = useBusiness();
 
   if (isLoading) return <Skeleton />;
@@ -25,7 +27,7 @@ const BusinessSelect = ({ contact }: { contact: Contact }) => {
     axios
       .patch(`/api/contacts/${contact.id}`, {
         businessId: businessIdInt || null,
-      })
+      }) 
       .catch(() => {
         toast.error("Changes could not be saved.");
       });
