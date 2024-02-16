@@ -1,7 +1,11 @@
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import authOptions from "./auth/authOptions";
 
-export default function Home() {
-  return <div>Hello! This is Dev branch</div>;
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  if (!session) return <div>Hello not logged in user!</div>;
+  return <div>Hello! {session?.user?.name}</div>;
 }
 
 export const metadata: Metadata = {
