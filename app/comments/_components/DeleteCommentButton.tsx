@@ -38,7 +38,7 @@ const DeleteCommentButton: React.FC<DeleteCommentButtonProps> = ({
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button disabled={isDeleting}>
+          <Button disabled={isDeleting} color="red">
             <TrashIcon /> Delete {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
@@ -54,7 +54,9 @@ const DeleteCommentButton: React.FC<DeleteCommentButtonProps> = ({
               </Button>
             </AlertDialogCancel>
             <AlertDialogAction>
-              <Button onClick={deleteComment}>Delete Comment</Button>
+              <Button onClick={deleteComment} color="red">
+                Delete Comment
+              </Button>
             </AlertDialogAction>
           </Flex>
         </AlertDialogContent>

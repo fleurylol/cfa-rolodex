@@ -7,7 +7,7 @@ const ContactActionBar = () => {
   return (
     <div>
       <Flex justify={"between"}>
-        <Button>
+        <Button color="red">
           <Link href="/contacts/new">New Contact</Link>
         </Button>
         {/* <SearchBar /> */}

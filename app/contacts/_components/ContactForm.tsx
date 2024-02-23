@@ -172,7 +172,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
             </div>
           </>
         )}
-        <Button type="submit" disabled={isSumbitting}>
+        <Button type="submit" disabled={isSumbitting} color="red">
           {contact ? "Update contact" : "Create New Contact"}{" "}
           {isSumbitting && <Spinner />}
         </Button>

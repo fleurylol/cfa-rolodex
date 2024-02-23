@@ -56,7 +56,7 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
             />
           </TextFieldRoot>
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
-          <Button type="submit" disabled={isSumbitting}>
+          <Button type="submit" disabled={isSumbitting} color="red">
             Add Note {isSumbitting && <Spinner />}
           </Button>
         </Card>
