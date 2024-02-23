@@ -49,7 +49,7 @@ const BusinessFormButton = () => {
   return (
     <AlertDialogRoot>
       <AlertDialogTrigger>
-        <Button>Create Business</Button>
+        <Button color="red">Create Business</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <form onSubmit={onSubmit}>

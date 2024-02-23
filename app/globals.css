@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-}
-
-@media {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-  }
-}
-
 body {
   color: black;
 }
@@ -22,6 +12,6 @@ body {
   }
 
   .nav-link {
-    @apply no-underline hover:text-red-300 text-white transition-colors;
+    @apply text-white no-underline transition-colors hover:text-red-300;
   }
 }
