@@ -20,6 +20,7 @@ import { z } from "zod";
 import { useEdgeStore } from "@/app/libs/edgestore";
 import DeleteImageButton from "./DeleteImageButton";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactForm = ({ contact }: { contact?: Contact }) => {
@@ -100,7 +101,6 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
 
       <form className="space-y-3" onSubmit={onSubmit}>
         <Box>
-          {userEmail}
           <TextFieldRoot>
             <TextFieldInput
               defaultValue={contact?.name}
@@ -163,7 +163,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
           <>
             <p>Preview</p>
             <div className="mt-4">
-              <img
+              <Image
                 src={previewUrl}
                 alt="Selected file"
                 width={200}
@@ -179,14 +179,14 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
       </form>
       {!file && !previewUrl && contact?.image && (
         <>
-          <div className="flex mt-2">
-            <img
+          <div className="mt-2 flex">
+            <Image
               src={contact?.image}
               alt={contact?.name}
               width={200}
               height={200}
             />
-            <div className="align place-self-center ml-2">
+            <div className="align ml-2 place-self-center">
               <DeleteImageButton contact={contact} />
             </div>
           </div>

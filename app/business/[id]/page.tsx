@@ -17,6 +17,7 @@ const BusinessDetailPage = async ({ params }: Props) => {
   const business = await prisma.business.findUnique({
     where: { id: parseInt(params.id) },
   });
+  const isOwner = session?.user?.email === business?.userEmail;
   if (!business) {
     return <div>Business not found</div>;
   }
@@ -33,7 +34,7 @@ const BusinessDetailPage = async ({ params }: Props) => {
           <Text>Contacts: </Text>
           <ContactList business={business} />
         </Box>
-        {session && (
+        {isOwner && (
           <Box>
             <Flex direction="column" gap="4">
               <EditBusinessButton business={business} />

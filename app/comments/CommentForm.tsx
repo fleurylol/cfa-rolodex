@@ -5,6 +5,7 @@ import {
   TextFieldRoot,
   TextFieldInput,
   Card,
+  TextArea,
 } from "@radix-ui/themes";
 import React, { useState } from "react";
 import { Contact } from "@prisma/client";
@@ -36,8 +37,7 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
     try {
       setSubmitting(true);
       await axios.post("/api/comments", { ...data, contactId, userEmail });
-      router.push("/contacts/list");
-      router.refresh();
+      window.location.reload();
     } catch (error) {
       setSubmitting(false);
       setError("An unexpected error occured.");
@@ -49,7 +49,11 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
       <form onSubmit={onSubmit}>
         <Card className="mb-3">
           <TextFieldRoot className="mb-3">
-            <TextFieldInput {...register("comment")} />
+            <TextArea
+              {...register("comment")}
+              size={"3"}
+              style={{ width: "100%", height: "150px" }}
+            />
           </TextFieldRoot>
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
           <Button type="submit" disabled={isSumbitting}>

@@ -14,6 +14,7 @@ import {
   Flex,
   Grid,
   Text,
+  TextArea,
   TextFieldInput,
   TextFieldRoot,
 } from "@radix-ui/themes";
@@ -67,7 +68,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
   });
   return (
     <>
-      <Box className="border rounded-md p-3 mb-3">
+      <Box className="mb-3 rounded-md border p-3">
         <Grid>
           <Flex
             direction={{ initial: "column", sm: "row" }}
@@ -97,7 +98,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
             </Flex>
           </Flex>
         </Grid>
-        <Box className="border rounded-md p-3">
+        <Box className="rounded-md border p-3">
           <Text size="2">{commentData}</Text>
         </Box>
         {isOwner && (
@@ -109,12 +110,14 @@ const CommentBox: React.FC<CommentBoxProps> = ({
                   Edit {isSumbitting && <Spinner />}
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent size={"4"}>
                 <AlertDialogTitle>Editing</AlertDialogTitle>
                 <form onSubmit={onSubmit}>
                   <TextFieldRoot>
-                    <TextFieldInput
+                    <TextArea
                       defaultValue={comment}
+                      size={"3"}
+                      style={{ width: "100%", height: "150px" }}
                       {...register("comment")}
                     />
                   </TextFieldRoot>

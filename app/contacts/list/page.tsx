@@ -1,5 +1,5 @@
 import prisma from "@/prisma/client";
-import Pagination from "../_components/Pagination";
+import Pagination from "../../components/Pagination";
 import ContactActionBar from "./ContactActionBar";
 import ContactTable, { ContactQuery, columnNames } from "./ContactTable";
 import { Flex } from "@radix-ui/themes";

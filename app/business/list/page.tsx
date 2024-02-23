@@ -1,48 +1,38 @@
-import React from "react";
-import BusinessActionBar from "./BusinessActionBar";
-import {
-  TableRoot,
-  TableHeader,
-  TableRow,
-  TableColumnHeaderCell,
-  TableBody,
-  TableCell,
-} from "@radix-ui/themes";
-import { Link } from "../../components";
-import prisma from "@/prisma/client";
-import { Metadata } from "next";
 import authOptions from "@/app/auth/authOptions";
+import Pagination from "@/app/components/Pagination";
+import prisma from "@/prisma/client";
+import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
+import BusinessActionBar from "./BusinessActionBar";
+import BusinessTable, { BusinessQuery } from "./BusinessTable";
 
-const BusinessesPage = async () => {
-  const business = await prisma.business.findMany();
+interface Props {
+  searchParams: BusinessQuery;
+}
+
+const BusinessesPage = async ({ searchParams }: Props) => {
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
+  const business = await prisma.business.findMany({
+    orderBy: { name: "asc" },
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+  });
+  const businessCount = await prisma.business.count();
   const session = await getServerSession(authOptions);
 
   return (
     <>
-      {session && <BusinessActionBar />}
-      <TableRoot variant="surface">
-        <TableHeader>
-          <TableRow>
-            <TableColumnHeaderCell>Business</TableColumnHeaderCell>
-            <TableColumnHeaderCell className="hidden md:table-cell">
-              Address
-            </TableColumnHeaderCell>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {business.map((business) => (
-            <TableRow key={business.id}>
-              <TableCell>
-                <Link href={`/business/${business.id}`}>{business.name}</Link>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">
-                {business.address}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </TableRoot>
+      <Flex direction="column" gap="3">
+        {session && <BusinessActionBar />}
+        <BusinessTable searchParams={searchParams} businesses={business} />
+        <Pagination
+          itemCount={businessCount}
+          pageSize={pageSize}
+          currentPage={page}
+        />
+      </Flex>
     </>
   );
 };

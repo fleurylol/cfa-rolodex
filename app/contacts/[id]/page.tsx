@@ -17,7 +17,7 @@ interface Props {
 const fetchContact = cache((contactId: number) =>
   prisma.contact.findUnique({
     where: { id: contactId },
-  })
+  }),
 );
 
 const ContactDetailPage = async ({ params }: Props) => {
@@ -33,7 +33,7 @@ const ContactDetailPage = async ({ params }: Props) => {
         <ContactDetails contact={contact} />
         <CommentSection contact={contact} />
       </Box>
-      {session && (
+      {isOwner && (
         <Box>
           <Flex direction="column" gap="4">
             <BusinessSelect contact={contact} />

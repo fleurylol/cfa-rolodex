@@ -23,7 +23,6 @@ const CommentList = ({ contact }: { contact: Contact }) => {
     queryKey: ["comments", contact.id],
     queryFn: () =>
       axios.get(`/api/comments/contact/${contact.id}`).then((res) => res.data),
-    staleTime: 60 * 1000,
   });
   return (
     <>
