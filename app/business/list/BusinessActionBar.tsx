@@ -6,7 +6,7 @@ const BusinessActionBar = () => {
   return (
     <Flex justify={"between"}>
       <BusinessFormButton />
-      <SearchBar />
+      {/* <SearchBar /> */}
     </Flex>
   );
 };

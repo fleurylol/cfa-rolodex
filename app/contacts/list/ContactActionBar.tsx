@@ -10,7 +10,7 @@ const ContactActionBar = () => {
         <Button>
           <Link href="/contacts/new">New Contact</Link>
         </Button>
-        <SearchBar />
+        {/* <SearchBar /> */}
       </Flex>
     </div>
   );
