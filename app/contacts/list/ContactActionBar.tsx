@@ -1,7 +1,7 @@
 import { Button, Flex } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
-import SearchBar from "../_components/SearchBar";
+import SearchBar from "../../components/SearchBar";
 
 const ContactActionBar = () => {
   return (
