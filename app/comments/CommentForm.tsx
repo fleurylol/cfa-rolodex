@@ -37,8 +37,7 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
     try {
       setSubmitting(true);
       await axios.post("/api/comments", { ...data, contactId, userEmail });
-      router.push(`/contacts/${contactId}`);
-      router.refresh();
+      window.location.reload();
     } catch (error) {
       setSubmitting(false);
       setError("An unexpected error occured.");
