@@ -6,6 +6,20 @@ body {
   color: black;
 }
 
+[type="button"],
+[type="reset"],
+[type="submit"],
+button {
+  background-color: none !important;
+}
+/* [type="submit"] {
+  background-color: #e5484d !important;
+} */
+
+/* [type="button"] {
+  background-color: #e5484d !important;
+} */
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
