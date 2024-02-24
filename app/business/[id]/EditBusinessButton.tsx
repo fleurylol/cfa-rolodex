@@ -48,7 +48,7 @@ const EditBusinessButton = ({ business }: { business: Business }) => {
   return (
     <AlertDialogRoot>
       <AlertDialogTrigger>
-        <Button color="green">
+        <Button style={{ backgroundColor: "#30a46c", color: "white" }}>
           <Pencil2Icon />
           Edit Business
         </Button>
