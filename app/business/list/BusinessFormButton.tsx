@@ -76,7 +76,7 @@ const BusinessFormButton = () => {
           <Flex mt="4" gap={"3"}>
             <AlertDialogAction>
               <Button
-                style={{ backgroundColor: "blue", color: "white" }}
+                style={{ backgroundColor: "#0090FF", color: "white" }}
                 type="submit"
                 disabled={isSubmitable}
               >
@@ -84,7 +84,10 @@ const BusinessFormButton = () => {
               </Button>
             </AlertDialogAction>
             <AlertDialogCancel>
-              <Button variant="soft" color="gray">
+              <Button
+                variant="soft"
+                style={{ backgroundColor: "#B4B4B4", color: "black" }}
+              >
                 Cancel
               </Button>
             </AlertDialogCancel>
