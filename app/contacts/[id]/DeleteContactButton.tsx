@@ -43,7 +43,11 @@ const DeleteContactButton = ({ contact }: { contact: Contact }) => {
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button color="red" type="submit" disabled={isDeleting}>
+          <Button
+            type="submit"
+            disabled={isDeleting}
+            style={{ backgroundColor: "#e5484d", color: "white" }}
+          >
             <TrashIcon /> Delete Contact {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
@@ -59,7 +63,11 @@ const DeleteContactButton = ({ contact }: { contact: Contact }) => {
               </Button>
             </AlertDialogCancel>
             <AlertDialogAction>
-              <Button onClick={deleteContact} color="red" type="submit">
+              <Button
+                onClick={deleteContact}
+                type="submit"
+                style={{ backgroundColor: "#e5484d", color: "white" }}
+              >
                 Delete Contact
               </Button>
             </AlertDialogAction>
