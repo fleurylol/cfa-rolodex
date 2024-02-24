@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import NavBar from "./NavBar";
 import { Container, Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import AuthProvider from "./auth/Provider";
-import { EdgeStoreProvider } from "./libs/edgestore";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import NavBar from "./NavBar";
 import QueryClientProvider from "./QueryClientProvider";
+import AuthProvider from "./auth/Provider";
+import "./globals.css";
+import { EdgeStoreProvider } from "./libs/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
