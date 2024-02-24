@@ -39,7 +39,10 @@ const DeleteImageButton = ({ contact }: { contact: Contact }) => {
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button disabled={isDeleting} color="red">
+          <Button
+            disabled={isDeleting}
+            style={{ backgroundColor: "#e5484d", color: "white" }}
+          >
             <TrashIcon />
             {isDeleting && <Spinner />}
           </Button>

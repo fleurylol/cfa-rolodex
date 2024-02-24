@@ -49,7 +49,9 @@ const BusinessFormButton = () => {
   return (
     <AlertDialogRoot>
       <AlertDialogTrigger>
-        <Button color="red">Create Business</Button>
+        <Button style={{ backgroundColor: "#e5484d", color: "white" }}>
+          Create Business
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <form onSubmit={onSubmit}>
@@ -73,7 +75,11 @@ const BusinessFormButton = () => {
 
           <Flex mt="4" gap={"3"}>
             <AlertDialogAction>
-              <Button color="blue" type="submit" disabled={isSubmitable}>
+              <Button
+                style={{ backgroundColor: "blue", color: "white" }}
+                type="submit"
+                disabled={isSubmitable}
+              >
                 Create
               </Button>
             </AlertDialogAction>

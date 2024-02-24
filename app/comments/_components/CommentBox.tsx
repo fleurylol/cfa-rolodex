@@ -105,7 +105,10 @@ const CommentBox: React.FC<CommentBoxProps> = ({
           <Flex mt="4" gap={"3"}>
             <AlertDialogRoot>
               <AlertDialogTrigger>
-                <Button color="green" disabled={isSumbitting}>
+                <Button
+                  style={{ backgroundColor: "#30a46c", color: "white" }}
+                  disabled={isSumbitting}
+                >
                   <Pencil2Icon />
                   Edit {isSumbitting && <Spinner />}
                 </Button>
@@ -123,7 +126,10 @@ const CommentBox: React.FC<CommentBoxProps> = ({
                   </TextFieldRoot>
                   <Flex mt="4" gap={"3"}>
                     <AlertDialogAction>
-                      <Button color="blue" type="submit">
+                      <Button
+                        style={{ backgroundColor: "blue", color: "white" }}
+                        type="submit"
+                      >
                         Save
                       </Button>
                     </AlertDialogAction>

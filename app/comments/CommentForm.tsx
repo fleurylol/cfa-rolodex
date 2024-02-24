@@ -56,7 +56,11 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
             />
           </TextFieldRoot>
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
-          <Button type="submit" disabled={isSumbitting} color="red">
+          <Button
+            type="submit"
+            disabled={isSumbitting}
+            style={{ backgroundColor: "#e5484d", color: "white" }}
+          >
             Add Note {isSumbitting && <Spinner />}
           </Button>
         </Card>
