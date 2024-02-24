@@ -38,7 +38,10 @@ const DeleteCommentButton: React.FC<DeleteCommentButtonProps> = ({
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button disabled={isDeleting} color="red">
+          <Button
+            disabled={isDeleting}
+            style={{ backgroundColor: "#e5484d", color: "white" }}
+          >
             <TrashIcon /> Delete {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
@@ -49,12 +52,18 @@ const DeleteCommentButton: React.FC<DeleteCommentButtonProps> = ({
           </AlertDialogDescription>
           <Flex mt="4" gap={"3"}>
             <AlertDialogCancel>
-              <Button variant="soft" color="gray">
+              <Button
+                variant="soft"
+                style={{ backgroundColor: "#B4B4B4", color: "black" }}
+              >
                 Cancel
               </Button>
             </AlertDialogCancel>
             <AlertDialogAction>
-              <Button onClick={deleteComment} color="red">
+              <Button
+                onClick={deleteComment}
+                style={{ backgroundColor: "#e5484d", color: "white" }}
+              >
                 Delete Comment
               </Button>
             </AlertDialogAction>
