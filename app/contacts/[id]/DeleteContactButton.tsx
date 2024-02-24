@@ -43,7 +43,7 @@ const DeleteContactButton = ({ contact }: { contact: Contact }) => {
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button disabled={isDeleting} color="red">
+          <Button color="red" disabled={isDeleting}>
             <TrashIcon /> Delete Contact {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
