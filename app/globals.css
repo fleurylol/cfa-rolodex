@@ -14,4 +14,6 @@ body {
   .nav-link {
     @apply text-white no-underline transition-colors hover:text-red-300;
   }
+
+  
 }
