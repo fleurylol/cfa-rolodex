@@ -56,7 +56,12 @@ const DeleteBusinessButton = ({ business }: { business: Business }) => {
               </Button>
             </AlertDialogCancel>
             <AlertDialogAction>
-              <Button onClick={deleteContact}>Delete Business</Button>
+              <Button
+                onClick={deleteContact}
+                style={{ backgroundColor: "#e5484d", color: "white" }}
+              >
+                Delete Business
+              </Button>
             </AlertDialogAction>
           </Flex>
         </AlertDialogContent>

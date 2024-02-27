@@ -12,6 +12,7 @@ import NextLink from "next/link";
 import React from "react";
 import { Link } from "../../components";
 
+
 export interface ContactQuery {
   orderBy: keyof Contact;
   sortDirection: "asc" | "desc";

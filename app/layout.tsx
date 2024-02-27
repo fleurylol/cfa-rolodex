@@ -6,6 +6,8 @@ import AuthProvider from "./auth/Provider";
 import "./globals.css";
 import { EdgeStoreProvider } from "./libs/edgestore";
 import { Container, Theme } from "@radix-ui/themes";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+
 import "@radix-ui/themes/styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
