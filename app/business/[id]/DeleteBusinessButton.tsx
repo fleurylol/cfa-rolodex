@@ -36,7 +36,10 @@ const DeleteBusinessButton = ({ business }: { business: Business }) => {
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button disabled={isDeleting}>
+          <Button
+            disabled={isDeleting}
+            style={{ backgroundColor: "#e5484d", color: "white" }}
+          >
             <TrashIcon /> Delete Business {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
