@@ -1,14 +1,24 @@
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
-import authOptions from "./auth/authOptions";
+import Header from "./home/Header";
+import { Grid } from "@radix-ui/themes";
+import PageBox from "./home/_components/PageBox";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-  if (!session) return <div>Hello not logged in user!</div>;
-  return <div>Hello! {session?.user?.name}</div>;
+  return (
+    <>
+      <Header />
+      <Grid columns="1" gap="3" width="auto">
+        <PageBox />
+        <PageBox />
+        <PageBox />
+      </Grid>
+    </>
+  );
 }
 
 export const metadata: Metadata = {
   title: "CFA Rolodex - Home",
   description: "Home page",
 };
+
+// https://docs.google.com/forms/d/e/1FAIpQLSeFImfvQieyhgCrj63KBx-AwgoylRME3K6hUA4S_TYKHchNhw/viewform
