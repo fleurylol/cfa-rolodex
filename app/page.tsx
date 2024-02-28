@@ -15,7 +15,12 @@ export default async function Home() {
       <Header />
       <Grid columns={{ initial: "1", md: "3" }} gap="3" width="auto">
         {appPages.map((page: Page) => (
-          <PageBox link={page.link} img={page.img} name={page.name} />
+          <PageBox
+            key={page.link}
+            link={page.link}
+            img={page.img}
+            name={page.name}
+          />
         ))}
       </Grid>
     </>
@@ -26,5 +31,3 @@ export const metadata: Metadata = {
   title: "CFA Rolodex - Home",
   description: "Home page",
 };
-
-// https://docs.google.com/forms/d/e/1FAIpQLSeFImfvQieyhgCrj63KBx-AwgoylRME3K6hUA4S_TYKHchNhw/viewform
