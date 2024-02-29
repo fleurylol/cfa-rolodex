@@ -4,14 +4,7 @@ import { contactSchema } from "@/app/contactSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Contact } from "@prisma/client";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import {
-  Box,
-  Button,
-  Callout,
-  Grid,
-  TextFieldInput,
-  TextFieldRoot,
-} from "@radix-ui/themes";
+import { Box, Button, Callout, Grid } from "@radix-ui/themes";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -21,6 +14,8 @@ import { useEdgeStore } from "@/app/libs/edgestore";
 import DeleteImageButton from "./DeleteImageButton";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { Input } from "@nextui-org/react";
+
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactForm = ({ contact }: { contact?: Contact }) => {
@@ -101,56 +96,56 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
 
       <form className="space-y-3" onSubmit={onSubmit}>
         <Box>
-          <TextFieldRoot>
-            <TextFieldInput
-              defaultValue={contact?.name}
-              placeholder="Name"
-              {...register("name")}
-            />
-          </TextFieldRoot>
+          <Input
+            defaultValue={contact?.name}
+            placeholder="Name"
+            color="danger"
+            variant="underlined"
+            {...register("name")}
+          />
           <ErrorMessage>{errors.name?.message}</ErrorMessage>
         </Box>
         <Grid columns="2" gap="3">
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.email}
-                placeholder="Email"
-                {...register("email")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.email}
+              placeholder="Email"
+              color="danger"
+              variant="underlined"
+              {...register("email")}
+            />
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
           </Box>
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.phone}
-                placeholder="Phone"
-                {...register("phone")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.phone}
+              placeholder="Phone"
+              color="danger"
+              variant="underlined"
+              {...register("phone")}
+            />
             <ErrorMessage>{errors.phone?.message}</ErrorMessage>
           </Box>
         </Grid>
         <Grid columns="2" gap="3">
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.businessName}
-                placeholder="Business"
-                {...register("businessName")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.businessName}
+              placeholder="Business"
+              color="danger"
+              variant="underlined"
+              {...register("businessName")}
+            />
             <ErrorMessage>{errors.businessName?.message}</ErrorMessage>
           </Box>
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.address}
-                placeholder="Address"
-                {...register("address")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.address}
+              placeholder="Address"
+              color="danger"
+              variant="underlined"
+              {...register("address")}
+            />
             <ErrorMessage>{errors.address?.message}</ErrorMessage>
           </Box>
           <input
