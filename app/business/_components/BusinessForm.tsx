@@ -66,9 +66,9 @@ const BusinessForm = ({ business }: { business?: Business }) => {
           variant="underlined"
           color="danger"
           {...register("address")}
-          className="mb-5"
         />
         <ErrorMessage>{errors.address?.message}</ErrorMessage>
+        <br></br>
         <Button disabled={isSumbitting}>
           {business ? `Update ${business.name}` : "Create Business"}
           {""}

@@ -18,7 +18,7 @@ const Header = async () => {
           {loggedUser}
         </Text>
         <Link
-          className="ml-auto self-end"
+          className="ml-auto self-end underline"
           href="https://docs.google.com/forms/d/e/1FAIpQLSeFImfvQieyhgCrj63KBx-AwgoylRME3K6hUA4S_TYKHchNhw/viewform"
         >
           Submit Feedback
