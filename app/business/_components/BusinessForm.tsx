@@ -47,7 +47,7 @@ const BusinessForm = ({ business }: { business?: Business }) => {
     <>
       <Heading>
         {" "}
-        {business ? `Updating ${business.name}` : "Create Business"}
+        {business ? `Updating ${business.name}` : "Creating New Business"}
       </Heading>
       <form onSubmit={onSubmit}>
         <Input

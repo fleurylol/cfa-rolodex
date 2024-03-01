@@ -1,10 +1,11 @@
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
+import { Box } from "@radix-ui/themes";
 
 const ContactForm = dynamic(
   () => import("@/app/contacts/_components/ContactForm"),
-  { ssr: false }
+  { ssr: false },
 );
 
 interface Props {
@@ -16,7 +17,11 @@ const EditContact = async ({ params }: Props) => {
     where: { id: parseInt(params.id) },
   });
   if (!contact) notFound();
-  return <ContactForm contact={contact} />;
+  return (
+    <Box className="ml-auto mr-auto sm:w-full md:w-7/12">
+      <ContactForm contact={contact} />
+    </Box>
+  );
 };
 
 export default EditContact;
