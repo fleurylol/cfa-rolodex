@@ -11,12 +11,14 @@ const Header = async () => {
   return (
     <>
       <Flex className="pb-3">
-        <Text size="8" color="red" className="pr-2">
-          Hello!
-        </Text>
-        <Text size="7" className="self-end">
-          {loggedUser}
-        </Text>
+        <Flex className="flex-col sm:flex-row">
+          <Text size="8" color="red" className="pr-2">
+            Hello!
+          </Text>
+          <Text size="7" className="self-end">
+            {loggedUser}
+          </Text>
+        </Flex>
         <Link
           className="ml-auto self-end underline"
           href="https://docs.google.com/forms/d/e/1FAIpQLSeFImfvQieyhgCrj63KBx-AwgoylRME3K6hUA4S_TYKHchNhw/viewform"
