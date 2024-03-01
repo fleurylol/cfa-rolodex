@@ -1,17 +1,20 @@
 "use client";
 import React from "react";
 import { Next13ProgressBar } from "next13-progressbar";
+import { NextUIProvider } from "@nextui-org/react";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      {children}
-      <Next13ProgressBar
-        height="4px"
-        color="#0A2FFF"
-        options={{ showSpinner: true }}
-        showOnShallow
-      />
+      <NextUIProvider>
+        {children}
+        <Next13ProgressBar
+          height="4px"
+          color="#0A2FFF"
+          options={{ showSpinner: true }}
+          showOnShallow
+        />
+      </NextUIProvider>
     </>
   );
 };

@@ -1,10 +1,9 @@
 import React from "react";
-import { Heading, Text, Box, Button, Flex, Grid } from "@radix-ui/themes";
+import { Heading, Text, Box, Flex, Grid } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
 import ContactList from "./ContactList";
 import authOptions from "@/app/auth/authOptions";
 import { getServerSession } from "next-auth";
-import BusinessFormButton from "../list/BusinessFormButton";
 import EditBusinessButton from "./EditBusinessButton";
 import DeleteBusinessButton from "./DeleteBusinessButton";
 interface Props {
@@ -37,7 +36,7 @@ const BusinessDetailPage = async ({ params }: Props) => {
         {isOwner && (
           <Box>
             <Flex direction="column" gap="4">
-              <EditBusinessButton business={business} />
+              <EditBusinessButton businessId={business.id} />
               <DeleteBusinessButton business={business} />
             </Flex>
           </Box>

@@ -1,11 +1,13 @@
-import { Flex } from "@radix-ui/themes";
-import BusinessFormButton from "./BusinessFormButton";
+import { Button, Flex } from "@radix-ui/themes";
 import SearchBar from "@/app/components/SearchBar";
+import Link from "next/link";
 
 const BusinessActionBar = () => {
   return (
     <Flex justify={"between"}>
-      <BusinessFormButton />
+      <Button>
+        <Link href="/business/new">New Business</Link>
+      </Button>
       {/* <SearchBar /> */}
     </Flex>
   );

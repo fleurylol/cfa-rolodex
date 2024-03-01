@@ -1,102 +1,13 @@
-"use client";
-import { businessSchema } from "@/app/api/business/businessSchema";
-import {
-  AlertDialogContent,
-  AlertDialogRoot,
-  AlertDialogTrigger,
-  Button,
-  Grid,
-  TextFieldInput,
-  TextFieldRoot,
-  Text,
-  AlertDialogAction,
-  AlertDialogCancel,
-  Flex,
-} from "@radix-ui/themes";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { ErrorMessage } from "@/app/components";
 import { Pencil2Icon } from "@radix-ui/react-icons";
-import { Business } from "@prisma/client";
-type BusinessFormData = z.infer<typeof businessSchema>;
+import { Button } from "@radix-ui/themes";
+import Link from "next/link";
 
-const EditBusinessButton = ({ business }: { business: Business }) => {
-  const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<BusinessFormData>({
-    resolver: zodResolver(businessSchema),
-  });
-  const name = watch("name");
-  const address = watch("address");
-  const isSubmitable = !name || !address;
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      await axios.patch(`/api/business/${business.id}`, data);
-      router.push(`/business/${business.id}`);
-      router.refresh();
-    } catch (error) {
-      console.error(error);
-    }
-  });
+const EditBusinessButton = ({ businessId }: { businessId: number }) => {
   return (
-    <AlertDialogRoot>
-      <AlertDialogTrigger>
-        <Button style={{ backgroundColor: "#30a46c", color: "white" }}>
-          <Pencil2Icon />
-          Edit Business
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <form onSubmit={onSubmit}>
-          <Text>Edit Business</Text>
-          <Grid gap="3" mb="2">
-            <TextFieldRoot>
-              <TextFieldInput
-                placeholder="Business Name"
-                defaultValue={business.name}
-                {...register("name")}
-              />
-            </TextFieldRoot>
-            <ErrorMessage>{errors.name?.message}</ErrorMessage>
-            <TextFieldRoot>
-              <TextFieldInput
-                placeholder="Business Address"
-                defaultValue={business.address}
-                {...register("address")}
-              />
-            </TextFieldRoot>
-            <ErrorMessage>{errors.address?.message}</ErrorMessage>
-          </Grid>
-
-          <Flex mt="4" gap={"3"}>
-            <AlertDialogAction>
-              <Button
-                style={{ backgroundColor: "#0090FF", color: "white" }}
-                type="submit"
-                disabled={isSubmitable}
-              >
-                Update
-              </Button>
-            </AlertDialogAction>
-            <AlertDialogCancel>
-              <Button
-                variant="soft"
-                style={{ backgroundColor: "#B4B4B4", color: "black" }}
-              >
-                Cancel
-              </Button>
-            </AlertDialogCancel>
-          </Flex>
-        </form>
-      </AlertDialogContent>
-    </AlertDialogRoot>
+    <Button color="green">
+      <Pencil2Icon />
+      <Link href={`/business/edit/${businessId}`}>Edit Business</Link>
+    </Button>
   );
 };
 

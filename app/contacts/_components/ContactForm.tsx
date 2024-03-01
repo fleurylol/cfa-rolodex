@@ -1,26 +1,37 @@
 "use client";
 import { ErrorMessage, Spinner } from "@/app/components";
 import { contactSchema } from "@/app/contactSchema";
+import { useEdgeStore } from "@/app/libs/edgestore";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@nextui-org/react";
 import { Contact } from "@prisma/client";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import {
+  BackpackIcon,
+  EnvelopeClosedIcon,
+  ExclamationTriangleIcon,
+  MobileIcon,
+  PersonIcon,
+  PaperPlaneIcon,
+} from "@radix-ui/react-icons";
+import { ImageUp } from "lucide-react";
 import {
   Box,
   Button,
   Callout,
+  Flex,
   Grid,
-  TextFieldInput,
-  TextFieldRoot,
+  Heading,
+  Text,
 } from "@radix-ui/themes";
 import axios from "axios";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useEdgeStore } from "@/app/libs/edgestore";
 import DeleteImageButton from "./DeleteImageButton";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
+
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactForm = ({ contact }: { contact?: Contact }) => {
@@ -98,67 +109,100 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-
+      <Heading>
+        {" "}
+        {contact ? `Updating ${contact.name}` : "Creating New Contact"}
+      </Heading>
       <form className="space-y-3" onSubmit={onSubmit}>
         <Box>
-          <TextFieldRoot>
-            <TextFieldInput
-              defaultValue={contact?.name}
-              placeholder="Name"
-              {...register("name")}
-            />
-          </TextFieldRoot>
+          <Input
+            defaultValue={contact?.name}
+            label="Name"
+            color="danger"
+            variant="underlined"
+            startContent={
+              <PersonIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
+            }
+            {...register("name")}
+          />
           <ErrorMessage>{errors.name?.message}</ErrorMessage>
         </Box>
         <Grid columns="2" gap="3">
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.email}
-                placeholder="Email"
-                {...register("email")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.email}
+              label="Email"
+              color="danger"
+              variant="underlined"
+              startContent={
+                <EnvelopeClosedIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
+              }
+              {...register("email")}
+            />
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
           </Box>
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.phone}
-                placeholder="Phone"
-                {...register("phone")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.phone}
+              label="Phone"
+              color="danger"
+              variant="underlined"
+              startContent={
+                <MobileIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
+              }
+              {...register("phone")}
+            />
             <ErrorMessage>{errors.phone?.message}</ErrorMessage>
           </Box>
         </Grid>
         <Grid columns="2" gap="3">
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.businessName}
-                placeholder="Business"
-                {...register("businessName")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.businessName}
+              label="Business"
+              color="danger"
+              variant="underlined"
+              startContent={
+                <BackpackIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
+              }
+              {...register("businessName")}
+            />
             <ErrorMessage>{errors.businessName?.message}</ErrorMessage>
           </Box>
           <Box>
-            <TextFieldRoot>
-              <TextFieldInput
-                defaultValue={contact?.address}
-                placeholder="Address"
-                {...register("address")}
-              />
-            </TextFieldRoot>
+            <Input
+              defaultValue={contact?.address}
+              label="Address"
+              color="danger"
+              variant="underlined"
+              startContent={
+                <PaperPlaneIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
+              }
+              {...register("address")}
+            />
             <ErrorMessage>{errors.address?.message}</ErrorMessage>
           </Box>
-          <input
-            type="file"
-            accept="image/jpeg,image/png"
-            onChange={handleFileChange}
-          />
         </Grid>
+        <Button
+          type="submit"
+          disabled={isSumbitting}
+          style={{ backgroundColor: "#e5484d", color: "white" }}
+        >
+          {contact ? "Update contact" : "Create New Contact"}{" "}
+          {isSumbitting && <Spinner />}
+        </Button>
+        <input
+          id="file"
+          type="file"
+          className="block w-full text-sm text-slate-500
+      file:mr-4 file:rounded-full file:border-0
+      file:bg-red-50 file:px-4
+      file:py-2 file:text-sm
+      file:font-semibold file:text-gray-600
+      hover:file:bg-red-100"
+          accept="image/jpeg,image/png"
+          onChange={handleFileChange}
+        />
         {previewUrl && file && (
           <>
             <p>Preview</p>
@@ -172,14 +216,6 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
             </div>
           </>
         )}
-        <Button
-          type="submit"
-          disabled={isSumbitting}
-          style={{ backgroundColor: "#e5484d", color: "white" }}
-        >
-          {contact ? "Update contact" : "Create New Contact"}{" "}
-          {isSumbitting && <Spinner />}
-        </Button>
       </form>
       {!file && !previewUrl && contact?.image && (
         <>

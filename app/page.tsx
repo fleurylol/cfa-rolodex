@@ -31,5 +31,3 @@ export const metadata: Metadata = {
   title: "CFA Rolodex - Home",
   description: "Home page",
 };
-
-// x
