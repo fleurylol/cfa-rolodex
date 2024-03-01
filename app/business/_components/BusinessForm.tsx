@@ -10,8 +10,9 @@ import { z } from "zod";
 import { Input } from "@nextui-org/react";
 import { ErrorMessage, Spinner } from "@/app/components";
 import { Button, Heading } from "@radix-ui/themes";
+import { BackpackIcon } from "@radix-ui/react-icons";
 import { Business } from "@prisma/client";
-
+import { Map } from "lucide-react";
 type BusinessFormData = z.infer<typeof businessSchema>;
 
 const BusinessForm = ({ business }: { business?: Business }) => {
@@ -52,23 +53,25 @@ const BusinessForm = ({ business }: { business?: Business }) => {
       <form onSubmit={onSubmit}>
         <Input
           defaultValue={business?.name}
-          placeholder="Enter Business Name"
           label="Name"
           variant="underlined"
           color="danger"
           {...register("name")}
+          startContent={
+            <BackpackIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
+          }
         />
         <ErrorMessage>{errors.name?.message}</ErrorMessage>
         <Input
           defaultValue={business?.address}
-          placeholder="Enter Business Address"
           label="Address"
           variant="underlined"
+          startContent={<Map size={16} color="#a1a1aa" strokeWidth={1} />}
           color="danger"
           {...register("address")}
-          className="mb-5"
         />
         <ErrorMessage>{errors.address?.message}</ErrorMessage>
+        <br></br>
         <Button disabled={isSumbitting}>
           {business ? `Update ${business.name}` : "Create Business"}
           {""}

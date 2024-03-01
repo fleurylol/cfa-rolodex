@@ -1,11 +1,6 @@
-import dynamic from "next/dynamic";
-import ContactFormSkelly from "./loading";
 import { Box } from "@radix-ui/themes";
-
-const ContactForm = dynamic(
-  () => import("@/app/contacts/_components/ContactForm"),
-  { ssr: false, loading: () => <ContactFormSkelly /> },
-);
+import ContactForm from "../_components/ContactForm";
+import { Metadata } from "next";
 
 const NewContactPage = () => {
   return (
@@ -15,4 +10,8 @@ const NewContactPage = () => {
   );
 };
 
+export const metadata: Metadata = {
+  title: "New Contact",
+  description: "Page for new contact creation.",
+};
 export default NewContactPage;

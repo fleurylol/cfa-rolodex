@@ -1,7 +1,8 @@
 import React from "react";
+import BusinessFormSkelly from "../../_components/BusinessFormSkelly";
 
-const Loading = () => {
-  return <div>Loading...</div>;
+const loading = () => {
+  return <BusinessFormSkelly />;
 };
 
-export default Loading;
+export default loading;

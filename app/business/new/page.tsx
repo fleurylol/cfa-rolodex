@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import { Metadata } from "next";
 import BusinessForm from "../_components/BusinessForm";
 import { Box } from "@radix-ui/themes";
 
@@ -9,6 +8,11 @@ const NewBusinessPage = () => {
       <BusinessForm />
     </Box>
   );
+};
+
+export const metadata: Metadata = {
+  title: "New Business",
+  description: "Page for new business creation.",
 };
 
 export default NewBusinessPage;

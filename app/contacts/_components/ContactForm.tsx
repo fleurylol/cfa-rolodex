@@ -10,20 +10,17 @@ import {
   EnvelopeClosedIcon,
   ExclamationTriangleIcon,
   MobileIcon,
-  PersonIcon,
-  PaperPlaneIcon,
+  PersonIcon
 } from "@radix-ui/react-icons";
-import { ImageUp } from "lucide-react";
 import {
   Box,
   Button,
   Callout,
-  Flex,
   Grid,
-  Heading,
-  Text,
+  Heading
 } from "@radix-ui/themes";
 import axios from "axios";
+import { Map } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -175,9 +172,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
               label="Address"
               color="danger"
               variant="underlined"
-              startContent={
-                <PaperPlaneIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
-              }
+              startContent={<Map size={16} color="#a1a1aa" strokeWidth={1} />}
               {...register("address")}
             />
             <ErrorMessage>{errors.address?.message}</ErrorMessage>
