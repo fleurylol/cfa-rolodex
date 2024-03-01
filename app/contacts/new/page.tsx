@@ -1,10 +1,8 @@
-"use client";
 import { Box } from "@radix-ui/themes";
-import delay from "delay";
 import ContactForm from "../_components/ContactForm";
+import { Metadata } from "next";
 
-const NewContactPage = async () => {
-  await delay(2000);
+const NewContactPage = () => {
   return (
     <Box className="ml-auto mr-auto sm:w-full md:w-7/12">
       <ContactForm />
@@ -12,4 +10,8 @@ const NewContactPage = async () => {
   );
 };
 
+export const metadata: Metadata = {
+  title: "New Contact",
+  description: "Page for new contact creation.",
+};
 export default NewContactPage;
