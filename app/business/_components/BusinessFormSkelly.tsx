@@ -10,8 +10,8 @@ const BusinessFormSkelly = () => {
           <Skeleton width={"20rem"} height={"30px"} />
         </Heading>
         <form>
-          <Skeleton height={"50px"} />
-          <Skeleton height={"50px"} />
+          <Skeleton height={"3rem"} />
+          <Skeleton height={"3rem"} />
         </form>
       </Box>
     </>

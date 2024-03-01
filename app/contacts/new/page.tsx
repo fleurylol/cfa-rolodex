@@ -1,13 +1,10 @@
-import dynamic from "next/dynamic";
-import ContactFormSkelly from "./loading";
+"use client";
 import { Box } from "@radix-ui/themes";
+import delay from "delay";
+import ContactForm from "../_components/ContactForm";
 
-const ContactForm = dynamic(
-  () => import("@/app/contacts/_components/ContactForm"),
-  { ssr: false, loading: () => <ContactFormSkelly /> },
-);
-
-const NewContactPage = () => {
+const NewContactPage = async () => {
+  await delay(2000);
   return (
     <Box className="ml-auto mr-auto sm:w-full md:w-7/12">
       <ContactForm />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cache } from "react";
 import { Heading, Text, Box, Flex, Grid } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
 import ContactList from "./ContactList";
@@ -10,12 +10,15 @@ interface Props {
   params: { id: string };
 }
 
+const fetchBusiness = cache((businessId: number) =>
+  prisma.business.findUnique({
+    where: { id: businessId },
+  }),
+);
+
 const BusinessDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
-
-  const business = await prisma.business.findUnique({
-    where: { id: parseInt(params.id) },
-  });
+  const business = await fetchBusiness(parseInt(params.id));
   const isOwner = session?.user?.email === business?.userEmail;
   if (!business) {
     return <div>Business not found</div>;
@@ -45,5 +48,14 @@ const BusinessDetailPage = async ({ params }: Props) => {
     </>
   );
 };
+
+export async function generateMetadata({ params }: Props) {
+  const business = await fetchBusiness(parseInt(params.id));
+
+  return {
+    title: business?.name,
+    description: "Details for " + business?.name,
+  };
+}
 
 export default BusinessDetailPage;
