@@ -25,7 +25,7 @@ const BusinessesPage = async ({ searchParams }: Props) => {
   return (
     <>
       <Flex direction="column" gap="3">
-        {session && <BusinessActionBar />}
+        <BusinessActionBar />
         <BusinessTable searchParams={searchParams} businesses={business} />
         <Pagination
           itemCount={businessCount}
