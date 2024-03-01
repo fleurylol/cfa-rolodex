@@ -41,7 +41,7 @@ const NavLinks = () => {
     { label: "Businesses", href: "/business/list" },
   ];
   return (
-    <ul className="flex space-x-6 ">
+    <ul className="flex space-x-3 md:space-x-6">
       {links.map((link) => (
         <li key={link.href}>
           <Link
