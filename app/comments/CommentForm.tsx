@@ -1,7 +1,8 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Contact } from "@prisma/client";
-import { Button, Card } from "@radix-ui/themes";
+import { Card } from "@radix-ui/themes";
+import { Button } from "../components/ui/Button";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
@@ -42,11 +43,7 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
         <Card className="mb-3">
           <Textarea {...register("comment")} className="mb-3" />
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
-          <Button
-            type="submit"
-            disabled={isSumbitting}
-            style={{ backgroundColor: "#e5484d", color: "white" }}
-          >
+          <Button type="submit" disabled={isSumbitting} variant={"default"}>
             Add Note {isSumbitting && <Spinner />}
           </Button>
         </Card>

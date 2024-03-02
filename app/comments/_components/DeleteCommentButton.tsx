@@ -1,9 +1,9 @@
 import { Spinner } from "@/app/components";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { Button } from "../../components/ui/Button";
 import {
   AlertDialogRoot,
   AlertDialogTrigger,
-  Button,
   AlertDialogContent,
   AlertDialogTitle,
   AlertDialogDescription,
@@ -38,10 +38,7 @@ const DeleteCommentButton: React.FC<DeleteCommentButtonProps> = ({
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button
-            disabled={isDeleting}
-            style={{ backgroundColor: "#e5484d", color: "white" }}
-          >
+          <Button disabled={isDeleting} variant={"delete"}>
             <TrashIcon /> Delete {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
@@ -52,18 +49,10 @@ const DeleteCommentButton: React.FC<DeleteCommentButtonProps> = ({
           </AlertDialogDescription>
           <Flex mt="4" gap={"3"}>
             <AlertDialogCancel>
-              <Button
-                variant="soft"
-                style={{ backgroundColor: "#B4B4B4", color: "black" }}
-              >
-                Cancel
-              </Button>
+              <Button variant="outline">Cancel</Button>
             </AlertDialogCancel>
             <AlertDialogAction>
-              <Button
-                onClick={deleteComment}
-                style={{ backgroundColor: "#e5484d", color: "white" }}
-              >
+              <Button onClick={deleteComment} variant={"delete"}>
                 Delete Comment
               </Button>
             </AlertDialogAction>
@@ -76,12 +65,7 @@ const DeleteCommentButton: React.FC<DeleteCommentButtonProps> = ({
           <AlertDialogDescription>
             Aw man something isnt working
           </AlertDialogDescription>
-          <Button
-            variant="soft"
-            color="gray"
-            mt={"2"}
-            onClick={() => setError(false)}
-          >
+          <Button variant="outline" onClick={() => setError(false)}>
             OK
           </Button>
         </AlertDialogContent>

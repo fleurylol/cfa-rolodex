@@ -10,12 +10,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
   Box,
-  Button,
   Flex,
   Grid,
   Text,
   TextArea,
-  TextFieldInput,
   TextFieldRoot,
 } from "@radix-ui/themes";
 import axios from "axios";
@@ -23,6 +21,7 @@ import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import DeleteCommentButton from "./DeleteCommentButton";
+import { Button } from "../../components/ui/Button";
 
 type CommentBoxProps = {
   key: number;
@@ -105,11 +104,8 @@ const CommentBox: React.FC<CommentBoxProps> = ({
           <Flex mt="4" gap={"3"}>
             <AlertDialogRoot>
               <AlertDialogTrigger>
-                <Button
-                  style={{ backgroundColor: "#30a46c", color: "white" }}
-                  disabled={isSumbitting}
-                >
-                  <Pencil2Icon />
+                <Button variant={"edit"} disabled={isSumbitting}>
+                  <Pencil2Icon className="mr-2 h-4 w-4" />
                   Edit {isSumbitting && <Spinner />}
                 </Button>
               </AlertDialogTrigger>
@@ -126,17 +122,12 @@ const CommentBox: React.FC<CommentBoxProps> = ({
                   </TextFieldRoot>
                   <Flex mt="4" gap={"3"}>
                     <AlertDialogAction>
-                      <Button
-                        style={{ backgroundColor: "blue", color: "white" }}
-                        type="submit"
-                      >
+                      <Button variant={"edit"} type="submit">
                         Save
                       </Button>
                     </AlertDialogAction>
                     <AlertDialogCancel>
-                      <Button variant="soft" color="gray">
-                        Cancel
-                      </Button>
+                      <Button variant="outline">Cancel</Button>
                     </AlertDialogCancel>
                   </Flex>
                 </form>
@@ -148,12 +139,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
                 <AlertDialogDescription>
                   Aw man something isnt working
                 </AlertDialogDescription>
-                <Button
-                  variant="soft"
-                  color="gray"
-                  mt={"2"}
-                  onClick={() => setError(false)}
-                >
+                <Button variant="outline" onClick={() => setError(false)}>
                   OK
                 </Button>
               </AlertDialogContent>
