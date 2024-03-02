@@ -1,28 +1,21 @@
 "use client";
-import {
-  Button,
-  Text,
-  TextFieldRoot,
-  TextFieldInput,
-  Card,
-  TextArea,
-} from "@radix-ui/themes";
-import React, { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Contact } from "@prisma/client";
+import { Card } from "@radix-ui/themes";
+import { Button } from "../components/ui/Button";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { commentSchema } from "./commentSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { ErrorMessage, Spinner } from "../components";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { Textarea } from "../components/ui/TextArea";
+import { commentSchema } from "./commentSchema";
 type CommentFormData = z.infer<typeof commentSchema>;
 
 const CommentForm = ({ contact }: { contact: Contact }) => {
   const [error, setError] = useState("");
   const [isSumbitting, setSubmitting] = useState(false);
-  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -48,19 +41,9 @@ const CommentForm = ({ contact }: { contact: Contact }) => {
     <>
       <form onSubmit={onSubmit}>
         <Card className="mb-3">
-          <TextFieldRoot className="mb-3">
-            <TextArea
-              {...register("comment")}
-              size={"3"}
-              style={{ width: "100%", height: "150px" }}
-            />
-          </TextFieldRoot>
+          <Textarea {...register("comment")} className="mb-3" />
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
-          <Button
-            type="submit"
-            disabled={isSumbitting}
-            style={{ backgroundColor: "#e5484d", color: "white" }}
-          >
+          <Button type="submit" disabled={isSumbitting} variant={"default"}>
             Add Note {isSumbitting && <Spinner />}
           </Button>
         </Card>

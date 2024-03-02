@@ -7,7 +7,6 @@ import {
   AlertDialogRoot,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Button,
   Flex,
 } from "@radix-ui/themes";
 import { TrashIcon } from "@radix-ui/react-icons";
@@ -17,6 +16,7 @@ import { useState } from "react";
 import { Spinner } from "@/app/components";
 import { useEdgeStore } from "@/app/libs/edgestore";
 import { Contact } from "@prisma/client";
+import { Button } from "../../components/ui/Button";
 
 const DeleteContactButton = ({ contact }: { contact: Contact }) => {
   const { edgestore } = useEdgeStore();
@@ -43,12 +43,9 @@ const DeleteContactButton = ({ contact }: { contact: Contact }) => {
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button
-            type="submit"
-            disabled={isDeleting}
-            style={{ backgroundColor: "#e5484d", color: "white" }}
-          >
-            <TrashIcon /> Delete Contact {isDeleting && <Spinner />}
+          <Button type="submit" disabled={isDeleting} variant="delete">
+            <TrashIcon className="mr-2 h-4 w-4" /> Delete Contact{" "}
+            {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
@@ -58,15 +55,13 @@ const DeleteContactButton = ({ contact }: { contact: Contact }) => {
           </AlertDialogDescription>
           <Flex mt="4" gap={"3"}>
             <AlertDialogCancel>
-              <Button variant="soft" color="gray">
-                Cancel
-              </Button>
+              <Button variant="outline">Cancel</Button>
             </AlertDialogCancel>
             <AlertDialogAction>
               <Button
                 onClick={deleteContact}
                 type="submit"
-                style={{ backgroundColor: "#e5484d", color: "white" }}
+                variant={"delete"}
               >
                 Delete Contact
               </Button>
@@ -81,9 +76,8 @@ const DeleteContactButton = ({ contact }: { contact: Contact }) => {
             Aw man something isnt working
           </AlertDialogDescription>
           <Button
-            variant="soft"
+            variant="outline"
             color="gray"
-            mt={"2"}
             onClick={() => setError(false)}
           >
             OK
