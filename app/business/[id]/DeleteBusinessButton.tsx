@@ -5,7 +5,6 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import {
   AlertDialogRoot,
   AlertDialogTrigger,
-  Button,
   AlertDialogContent,
   AlertDialogTitle,
   AlertDialogDescription,
@@ -16,6 +15,7 @@ import {
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { Button } from "../../components/ui/Button";
 
 const DeleteBusinessButton = ({ business }: { business: Business }) => {
   const router = useRouter();
@@ -36,11 +36,9 @@ const DeleteBusinessButton = ({ business }: { business: Business }) => {
     <>
       <AlertDialogRoot>
         <AlertDialogTrigger>
-          <Button
-            disabled={isDeleting}
-            style={{ backgroundColor: "#e5484d", color: "white" }}
-          >
-            <TrashIcon /> Delete Business {isDeleting && <Spinner />}
+          <Button disabled={isDeleting} variant={"delete"}>
+            <TrashIcon className="mr-2 h-4 w-4" /> Delete Business{" "}
+            {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
@@ -51,15 +49,10 @@ const DeleteBusinessButton = ({ business }: { business: Business }) => {
           </AlertDialogDescription>
           <Flex mt="4" gap={"3"}>
             <AlertDialogCancel>
-              <Button variant="soft" color="gray">
-                Cancel
-              </Button>
+              <Button variant="outline">Cancel</Button>
             </AlertDialogCancel>
             <AlertDialogAction>
-              <Button
-                onClick={deleteContact}
-                style={{ backgroundColor: "#e5484d", color: "white" }}
-              >
+              <Button onClick={deleteContact} variant={"delete"}>
                 Delete Business
               </Button>
             </AlertDialogAction>
@@ -73,9 +66,8 @@ const DeleteBusinessButton = ({ business }: { business: Business }) => {
             Aw man something isnt working
           </AlertDialogDescription>
           <Button
-            variant="soft"
+            variant="outline"
             color="gray"
-            mt={"2"}
             onClick={() => setError(false)}
           >
             OK

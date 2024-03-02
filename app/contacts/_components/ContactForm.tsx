@@ -5,20 +5,15 @@ import { useEdgeStore } from "@/app/libs/edgestore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@nextui-org/react";
 import { Contact } from "@prisma/client";
+import { Button } from "@/app/components/ui/Button";
 import {
   BackpackIcon,
   EnvelopeClosedIcon,
   ExclamationTriangleIcon,
   MobileIcon,
-  PersonIcon
+  PersonIcon,
 } from "@radix-ui/react-icons";
-import {
-  Box,
-  Button,
-  Callout,
-  Grid,
-  Heading
-} from "@radix-ui/themes";
+import { Box, Callout, Grid, Heading } from "@radix-ui/themes";
 import axios from "axios";
 import { Map } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -178,11 +173,7 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
             <ErrorMessage>{errors.address?.message}</ErrorMessage>
           </Box>
         </Grid>
-        <Button
-          type="submit"
-          disabled={isSumbitting}
-          style={{ backgroundColor: "#e5484d", color: "white" }}
-        >
+        <Button type="submit" disabled={isSumbitting} variant="default">
           {contact ? "Update contact" : "Create New Contact"}{" "}
           {isSumbitting && <Spinner />}
         </Button>
