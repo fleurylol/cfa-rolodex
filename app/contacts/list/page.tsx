@@ -26,8 +26,7 @@ const ContactsPage = async ({ searchParams }: Props) => {
   const contactCount = await prisma.contact.count();
 
   return (
-    <Flex direction="column" gap="3">
-      <ContactActionBar />
+    <Flex direction="column" gap="2">
       <ContactTable searchParams={searchParams} contacts={contacts} />
       <Pagination
         itemCount={contactCount}
