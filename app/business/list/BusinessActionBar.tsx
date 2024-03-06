@@ -1,5 +1,5 @@
 import { Flex } from "@radix-ui/themes";
-import SearchBar from "@/app/components/SearchBar";
+import SearchBar from "@/app/components/searchBar/SearchBar";
 import Link from "next/link";
 import { Button } from "../../components/ui/Button";
 

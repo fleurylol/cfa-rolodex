@@ -26,7 +26,7 @@ interface Props {
 const ContactTable = ({ searchParams, contacts }: Props) => {
   return (
     <>
-      <ContactActionBar />
+      <ContactActionBar contacts={contacts} />
       <TableRoot variant="surface">
         <TableHeader>
           <TableRow>
