@@ -1,7 +1,7 @@
 import { Flex } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
-import SearchBar from "../../components/searchBar/SearchBar";
+import SearchBar from "../_components/searchBar/SearchBar";
 import { Button } from "../../components/ui/Button";
 import { Contact } from "@prisma/client";
 
