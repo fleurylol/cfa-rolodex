@@ -40,14 +40,20 @@ const SearchBar = ({ contacts }: SearchBarProps) => {
         onChange={handleInputChange}
       />
       {results.length > 0 && (
-        <div className="absolute z-10 w-full rounded-bl-md rounded-br-md border-2 bg-white  ring-violet-300">
+        <div className="absolute z-10 w-full rounded-bl-md rounded-br-md border-2 bg-white">
           {results.map((result) => (
             <ResultBox
               key={result.id}
+              id={result.id}
               name={result.name}
               business={result.businessName}
             />
           ))}
+        </div>
+      )}
+      {results.length === 0 && searchTerm && (
+        <div className="absolute z-10 w-full rounded-bl-md rounded-br-md border-2 bg-white">
+          <p className="p-2">No results found</p>
         </div>
       )}
     </div>
