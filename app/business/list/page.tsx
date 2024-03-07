@@ -1,10 +1,7 @@
-import authOptions from "@/app/auth/authOptions";
 import Pagination from "@/app/components/Pagination";
 import prisma from "@/prisma/client";
 import { Flex } from "@radix-ui/themes";
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
-import BusinessActionBar from "./BusinessActionBar";
 import BusinessTable, { BusinessQuery } from "./BusinessTable";
 
 interface Props {
@@ -20,12 +17,10 @@ const BusinessesPage = async ({ searchParams }: Props) => {
     take: pageSize,
   });
   const businessCount = await prisma.business.count();
-  const session = await getServerSession(authOptions);
 
   return (
     <>
       <Flex direction="column" gap="3">
-        <BusinessActionBar />
         <BusinessTable searchParams={searchParams} businesses={business} />
         <Pagination
           itemCount={businessCount}
