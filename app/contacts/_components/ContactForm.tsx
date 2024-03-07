@@ -173,7 +173,11 @@ const ContactForm = ({ contact }: { contact?: Contact }) => {
             <ErrorMessage>{errors.address?.message}</ErrorMessage>
           </Box>
         </Grid>
-        <Button type="submit" disabled={isSumbitting} variant="default">
+        <Button
+          type="submit"
+          disabled={isSumbitting}
+          variant={contact ? "edit" : "default"}
+        >
           {contact ? "Update contact" : "Create New Contact"}{" "}
           {isSumbitting && <Spinner />}
         </Button>

@@ -1,14 +1,15 @@
 import { Business } from "@prisma/client";
 import {
-    TableBody,
-    TableCell,
-    TableColumnHeaderCell,
-    TableHeader,
-    TableRoot,
-    TableRow,
-    Text,
+  TableBody,
+  TableCell,
+  TableColumnHeaderCell,
+  TableHeader,
+  TableRoot,
+  TableRow,
+  Text,
 } from "@radix-ui/themes";
 import { Link } from "../../components";
+import BusinessActionBar from "./BusinessActionBar";
 
 export interface BusinessQuery {
   orderBy: keyof Business;
@@ -23,32 +24,35 @@ interface Props {
 
 const BusinessTable = ({ searchParams, businesses }: Props) => {
   return (
-    <TableRoot variant="surface">
-      <TableHeader>
-        <TableRow>
-          {columns.map((column) => (
-            <TableColumnHeaderCell
-              key={column.value}
-              className={column.className}
-            >
-              <Text>{column.label}</Text>
-            </TableColumnHeaderCell>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {businesses.map((business) => (
-          <TableRow key={business.id}>
-            <TableCell>
-              <Link href={`/business/${business.id}`}>{business.name}</Link>
-            </TableCell>
-            <TableCell className="hidden md:table-cell">
-              {business.address}
-            </TableCell>
+    <>
+      <BusinessActionBar businesses={businesses}/>
+      <TableRoot variant="surface">
+        <TableHeader>
+          <TableRow>
+            {columns.map((column) => (
+              <TableColumnHeaderCell
+                key={column.value}
+                className={column.className}
+              >
+                <Text>{column.label}</Text>
+              </TableColumnHeaderCell>
+            ))}
           </TableRow>
-        ))}
-      </TableBody>
-    </TableRoot>
+        </TableHeader>
+        <TableBody>
+          {businesses.map((business) => (
+            <TableRow key={business.id}>
+              <TableCell>
+                <Link href={`/business/${business.id}`}>{business.name}</Link>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
+                {business.address}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </TableRoot>
+    </>
   );
 };
 

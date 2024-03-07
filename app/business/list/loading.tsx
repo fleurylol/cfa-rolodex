@@ -8,13 +8,12 @@ import {
 } from "@radix-ui/themes";
 import React from "react";
 import { Skeleton } from "@/app/components";
-import BusinessActionBar from "./BusinessActionBar";
 
 const BusinessLoadingSkelly = () => {
   const business = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div>
-      <BusinessActionBar />
+      {/* <BusinessActionBar /> */}
       <TableRoot variant="surface">
         <TableHeader>
           <TableRow>

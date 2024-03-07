@@ -7,14 +7,13 @@ import {
   TableCell,
 } from "@radix-ui/themes";
 import React from "react";
-import ContactActionBar from "./ContactActionBar";
 import { Skeleton } from "@/app/components";
 
 const ContactLoadingSkeleton = () => {
   const contacts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div>
-      <ContactActionBar />
+      {/* <ContactActionBar /> */}
       <TableRoot variant="surface">
         <TableHeader>
           <TableRow>
