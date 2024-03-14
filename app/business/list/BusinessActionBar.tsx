@@ -13,7 +13,7 @@ const BusinessActionBar: React.FC<BusinessActionBarProps> = ({
 }) => {
   return (
     <Flex justify={"between"}>
-      <Button variant={"default"}>
+      <Button variant={"default"} className="mr-2">
         <Link href="/business/new">New Business</Link>
       </Button>
       <SearchBar businesses={businesses} />

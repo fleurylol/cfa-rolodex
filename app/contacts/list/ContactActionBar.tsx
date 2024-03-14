@@ -13,7 +13,7 @@ const ContactActionBar: React.FC<ContactActionBarProps> = ({ contacts }) => {
   return (
     <div>
       <Flex justify={"between"}>
-        <Button>
+        <Button className="mr-2">
           <Link href="/contacts/new">New Contact</Link>
         </Button>
         <SearchBar contacts={contacts} />
